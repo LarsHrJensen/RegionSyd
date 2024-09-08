@@ -1,0 +1,16 @@
+# Visual Studio specific files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Log files
+*.log
+
+# Ignore macOS system files
+.DS_Store

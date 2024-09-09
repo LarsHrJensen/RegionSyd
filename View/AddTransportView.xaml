@@ -1,0 +1,29 @@
+﻿<Window x:Class="RegionSyd.View.AddTransportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RegionSyd.View"
+        mc:Ignorable="d"
+        Title="AddTransportView" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical" Margin="50">
+            <StackPanel Orientation="Horizontal" >
+                <Label Content="Patient Name"/>
+                <TextBox Width="200" Margin="2" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Patient CPR"/>
+                <TextBox Width="200" Margin="2"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Patient Aktualitet"/>
+                <ComboBox />
+            </StackPanel>
+
+          
+        </StackPanel>
+    </Grid>
+</Window>

@@ -7,23 +7,28 @@
         mc:Ignorable="d"
         Title="AddTransportView" Height="450" Width="800">
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="50">
-            <StackPanel Orientation="Horizontal" >
-                <Label Content="Patient Name"/>
-                <TextBox Width="200" Margin="2" />
-            </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Patient CPR"/>
-                <TextBox Width="200" Margin="2"/>
-            </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+            
+                <Label Content="Fra" Grid.Row="0"  Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+            <ComboBox Grid.Row="0"  Grid.Column="1" Name="FromHospital" ItemsSource="{Binding}">
+            </ComboBox>
 
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Patient Aktualitet"/>
-                <ComboBox />
-            </StackPanel>
+        <Label Grid.Row="1" Grid.Column="0" Content="Til" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Name="ToHospital" ItemsSource="{Binding}">
+        </ComboBox>
 
-          
-        </StackPanel>
+        <Label Grid.Row="2" Grid.Column="0" Content="Patient" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
+        <ComboBox Grid.Row="2" Grid.Column="1">
+        </ComboBox>
+
     </Grid>
 </Window>

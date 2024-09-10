@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RegionSyd.VIewModel
 {
-    internal class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RegionSyd.VIewModel
 {
-    public class AddTransportViewModel
+    public class AddTransportViewModel : ViewModelBase
     {
 
     }

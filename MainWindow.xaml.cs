@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using RegionSyd.Model.Repository;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,9 @@ namespace RegionSyd
         public MainWindow()
         {
             InitializeComponent();
+
+
+            
         }
     }
 }

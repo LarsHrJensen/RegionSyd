@@ -7,7 +7,7 @@ public class Hospital
     public string City { get; set; }
     public string Region { get; set; }
 
-    public Hospital(string name, string address, string city, string region, string region)
+    public Hospital(string name, string address, string city, string region)
     {   
         Name = name;
         Address = address;

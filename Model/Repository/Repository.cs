@@ -48,7 +48,6 @@ namespace RegionSyd.Model.Repository
             repo.Clear();
         }
 
-
         // TODO : return error code instead perhaps
         public bool Remove(T t)
         {
@@ -77,7 +76,6 @@ namespace RegionSyd.Model.Repository
             }
             return default;
         }
-
 
         public void RepositoryHasChanged()
         {

@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RegionSyd.Model.Store;
 
 namespace RegionSyd.View
 {
@@ -30,9 +31,13 @@ namespace RegionSyd.View
 
             MainViewModel mainViewModel = new MainViewModel();
             this.DataContext = mainViewModel;
-            
 
+            HospitalStore.Hospitals = new List<Hospital>();
 
+            // Hardcoded shithousery
+            HospitalStore.Hospitals.Add(new("Rigshospitalet", "Blegdamsvej 9", "København 2100", "Region Hovedstaden"));
+            HospitalStore.Hospitals.Add(new("Odense Universitetshospital", "J. B. Winsløws Vej 4", "Odense 5000", "Region Syddanmark"));
+            HospitalStore.Hospitals.Add(new("Aarhus Universitetshospital", "Palle Juul-Jensens Boulevard 99", " Aarhus N 8200", "Region Midtjylland"));
         }
     }
 }

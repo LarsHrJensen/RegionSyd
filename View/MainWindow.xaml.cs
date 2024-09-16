@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using RegionSyd.Model.Store;
+using RegionSyd.Model.Repository;
+using RegionSyd.Model.Repository.Repository;
 
 namespace RegionSyd.View
 {
@@ -38,6 +40,16 @@ namespace RegionSyd.View
             HospitalStore.Hospitals.Add(new("Rigshospitalet", "Blegdamsvej 9", "København 2100", "Region Hovedstaden"));
             HospitalStore.Hospitals.Add(new("Odense Universitetshospital", "J. B. Winsløws Vej 4", "Odense 5000", "Region Syddanmark"));
             HospitalStore.Hospitals.Add(new("Aarhus Universitetshospital", "Palle Juul-Jensens Boulevard 99", " Aarhus N 8200", "Region Midtjylland"));
+
+
+
+            PatientRepository patientRepo = PatientRepository.GetInstance();
+            patientRepo.Add(new("0301001233", "Rasmus Kallehauge", "4"));
+            patientRepo.Add(new("1109016995", "Lars Jensen ", "2"));
+            patientRepo.Add(new("0404961944", "Mathilde Johnsen-Zaavi", "1"));
+
+
+            AmbulanceRepository ambulanceRepo = AmbulanceRepository.GetInstance();
         }
     }
 }

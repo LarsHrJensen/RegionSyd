@@ -25,5 +25,10 @@ namespace RegionSyd.View
         {
             InitializeComponent();
         }
+
+        private void PatientNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

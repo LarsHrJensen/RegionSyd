@@ -1,4 +1,5 @@
-﻿using RegionSyd.ViewModel;
+﻿using RegionSyd.Model.Command;
+using RegionSyd.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,10 @@ namespace RegionSyd.ViewModel
     {
 
         // TODO : Determin whether to instantiate VMs during runtime, or do them all in the beginning and save them in memory until needed?
+
+        public NavigationCommand NavCreatePatient { get; }
+        public NavigationCommand NavCreateTransport { get; }
+
 
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -29,7 +34,19 @@ namespace RegionSyd.ViewModel
             // Landing viewmodel
             //_currentViewModel = new AddTransportViewModel();
             _currentViewModel = new AddPatientViewModel();
+            NavCreatePatient = new(navCreatePatient);
+            NavCreateTransport = new(navCreateTransport);
+
         }
 
+
+        private void navCreatePatient()
+        {
+            CurrentViewModel = new AddPatientViewModel();
+        }
+        private void navCreateTransport()
+        {
+            CurrentViewModel = new AddTransportViewModel();
+        }
     }
 }

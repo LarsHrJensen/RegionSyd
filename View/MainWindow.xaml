@@ -6,20 +6,30 @@
         xmlns:localviews="clr-namespace:RegionSyd.View"
         xmlns:localviewmodels="clr-namespace:RegionSyd.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        ResizeMode="NoResize">
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}">
-            <ContentControl.Resources>
-                <DataTemplate DataType="{x:Type localviewmodels:AddPatientViewModel}">
-                    <localviews:AddPatientView/>
-                </DataTemplate>
+        <StackPanel Orientation="Vertical">
+            <!-- Navigation bar -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button Content="CreatePatient" Command="{Binding NavCreatePatient}" Padding="{StaticResource SmallMargin}"/>
+                <Button Content="CreateTransport" Command="{Binding NavCreateTransport}" Padding="{StaticResource SmallMargin}"/>
+                <!--<Button Content="AddPatient" Command="{Binding NavigateAddPatient}"/>-->
+            </StackPanel>
+        
+            <ContentControl Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type localviewmodels:AddPatientViewModel}">
+                        <localviews:AddPatientView/>
+                    </DataTemplate>
 
-                <DataTemplate DataType="{x:Type localviewmodels:AddTransportViewModel}">
-                    <localviews:AddTransportView/>
-                </DataTemplate>
+                    <DataTemplate DataType="{x:Type localviewmodels:AddTransportViewModel}">
+                        <localviews:AddTransportView/>
+                    </DataTemplate>
                 
                 
-            </ContentControl.Resources>
-        </ContentControl>
+                </ContentControl.Resources>
+            </ContentControl>
+        </StackPanel>
     </Grid>
 </Window>

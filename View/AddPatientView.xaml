@@ -11,7 +11,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             
-        <Grid Margin="20">
+        <Grid Margin="{StaticResource DefaultMargin}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
@@ -25,6 +25,8 @@
                 <RowDefinition Height="100"/>
             </Grid.RowDefinitions>
 
+            
+            
             <TextBox Grid.Column="1" Grid.Row="0" Height="{StaticResource TextboxHeight}" Text="{Binding PatientName, UpdateSourceTrigger=PropertyChanged}" Name="PatientNameTextBox"/>
                 <TextBox Grid.Column="1" Grid.Row="1"  Height="{StaticResource TextboxHeight}" Text="{Binding PatientCPR, UpdateSourceTrigger=PropertyChanged}" Name="PatientCPRTextBox"/>
                 <TextBox Grid.Column="1" Grid.Row="2"  Height="{StaticResource TextboxHeight}" Text="{Binding PatientActuality, UpdateSourceTrigger=PropertyChanged}" Name="PatientActualityTextBox"/>

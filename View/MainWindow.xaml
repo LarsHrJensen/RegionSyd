@@ -13,6 +13,12 @@
                 <DataTemplate DataType="{x:Type localviewmodels:AddPatientViewModel}">
                     <localviews:AddPatientView/>
                 </DataTemplate>
+
+                <DataTemplate DataType="{x:Type localviewmodels:AddTransportViewModel}">
+                    <localviews:AddTransportView/>
+                </DataTemplate>
+                
+                
             </ContentControl.Resources>
         </ContentControl>
     </Grid>

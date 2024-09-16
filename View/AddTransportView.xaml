@@ -1,34 +1,80 @@
-﻿<Window x:Class="RegionSyd.View.AddTransportView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RegionSyd.View"
-        mc:Ignorable="d"
-        Title="AddTransportView" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
+﻿<UserControl x:Class="RegionSyd.View.AddTransportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RegionSyd.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White"
+             >
+    <Grid Margin="{StaticResource DefaultMargin}">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="250"/>
-        </Grid.ColumnDefinitions>
-            
-                <Label Content="Fra" Grid.Row="0"  Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-            <ComboBox Grid.Row="0"  Grid.Column="1" Name="FromHospital" ItemsSource="{Binding}">
-            </ComboBox>
+        <StackPanel Orientation="Horizontal">
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Til" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" Name="ToHospital" ItemsSource="{Binding}">
-        </ComboBox>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Patient" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
-        <ComboBox Grid.Row="2" Grid.Column="1">
-        </ComboBox>
+            <Grid>
 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="From Hospital:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Hospitals}" Margin="{StaticResource SmallMargin}" Name="FromHospital" SelectionChanged="HospitalSelection" SelectedValue="{Binding FromHospital, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+
+                <Label Content="To Hospital:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Hospitals}" Margin="{StaticResource SmallMargin}" Name="ToHospital" SelectionChanged="HospitalSelection" SelectedValue="{Binding ToHospital, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Label Content="Patient:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Patients}" Margin="{StaticResource SmallMargin}" SelectedItem="{Binding Patient, Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FullName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Label Grid.Row="3" Grid.Column="0" Content="Time Of Arrival:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <DatePicker Margin="{StaticResource SmallMargin}" Grid.Row="3" Grid.Column="1" Name="SelectedDate" SelectedDate="{Binding Arrival, Mode=TwoWay}"/>
+
+                <Button Content="Create Transport" Grid.Row="4" Grid.Column="1" Command="{Binding CreateTransport}" Margin="{StaticResource SmallMargin}"/>
+
+            </Grid>
+            <ListView Width="300" ItemsSource="{Binding Transports}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding StartHospital.Name}" Margin="{StaticResource SmallMargin}"/>
+                            <TextBlock Text="{Binding DestinationHospital.Name}" Margin="{StaticResource SmallMargin}"/>
+                            <TextBlock Text="{Binding Patient.FullName}" Margin="{StaticResource SmallMargin}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackPanel>
     </Grid>
-</Window>
+</UserControl>

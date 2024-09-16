@@ -8,20 +8,20 @@ namespace RegionSyd.Model
 {
     public class Transport
     {
-     public string StartHospital { get; set; }
-     public string DestinationHospital { get; set; }
-     public DateTime ArrivalTime { get; set; }
-     public int TravelTime { get; set; }
+        public Hospital StartHospital { get; set; }
+        public Hospital DestinationHospital { get; set; }
+        public Patient Patient { get; set; }
+        public DateTime ArrivalTime { get; set; }
+        public int TravelTime { get; set; }
 
-        public Transport(string startHospital, string destinationHospital, DateTime arrivalTime, int travelTime)
+        public Transport(Hospital startHospital, Hospital destinationHospital, DateTime arrivalTime, Patient patient, int travelTime = 0)
         {
             StartHospital = startHospital;
             DestinationHospital = destinationHospital;
             ArrivalTime = arrivalTime;
             TravelTime = travelTime;
+            Patient = patient;
         }
-
-
 
     }
 }

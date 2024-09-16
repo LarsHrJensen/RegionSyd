@@ -10,6 +10,7 @@ using RegionSyd.Model;
 using RegionSyd.Model.Repository;
 using RegionSyd.Model.Message;
 using System.Diagnostics;
+using RegionSyd.Model.Store;
 
 namespace RegionSyd.ViewModel
 {
@@ -54,13 +55,13 @@ namespace RegionSyd.ViewModel
 
         public RelayCommand CreatePatient {  get; set; }
 
-        ObservableCollection<Patient> AddedPatients { get; set; }
-
-        public event EventHandler<SuccessMessage> PatientAdded;
+        public ObservableCollection<Patient> AddedPatients { get; set; }
+        PatientRepository patientRepo;
 
         public AddPatientViewModel()
         {
-            AddedPatients = new ObservableCollection<Patient>();
+            patientRepo = PatientRepository.GetInstance();
+            AddedPatients = new(patientRepo.GetAll());
             CreatePatient = new(IsValidPatientData, CreateNewPatient);
         }
 
@@ -86,14 +87,22 @@ namespace RegionSyd.ViewModel
 
             repo.Add(patient);
 
-            SuccessMessage msg = new SuccessMessage();
-            msg.Message = $"Successfully added {PatientName}.";
+            AddedPatients = new(repo.GetAll());
+            OnPropertyChanged(nameof(AddedPatients));
 
-            PatientAdded?.Invoke(this, msg);
+            MessageStore.Message = "Patient added successfully.";
+            ResetFields();
+        }
 
-            AddedPatients.Add(patient);
+        private void ResetFields()
+        {
+            _patientCPR = null;
+            _patientName = null;
+            _patientActuality = null;
 
-            Debug.WriteLine("Hello?");
+            OnPropertyChanged(nameof(PatientName));
+            OnPropertyChanged(nameof(PatientActuality));
+            OnPropertyChanged(nameof(PatientCPR));
         }
     }
 }

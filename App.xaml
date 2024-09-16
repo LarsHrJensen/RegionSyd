@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:RegionSyd"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             StartupUri="View/MainWindow.xaml">
+             Startup="InitializeApp">
     <Application.Resources>
         <sys:Double x:Key="TextboxHeight">40</sys:Double>
         <!-- Statically defined height for textboxes, allows more consistent style throughout application. -->
-        
+
+        <Thickness x:Key="DefaultMargin">20</Thickness>
+        <Thickness x:Key="SmallMargin">5</Thickness>
         
 
     </Application.Resources>

@@ -27,6 +27,7 @@ namespace RegionSyd.ViewModel
         public MainViewModel()
         {
             // Landing viewmodel
+            //_currentViewModel = new AddTransportViewModel();
             _currentViewModel = new AddPatientViewModel();
         }
 

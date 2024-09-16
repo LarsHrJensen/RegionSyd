@@ -12,12 +12,7 @@ namespace RegionSyd.ViewModel
 {
     public class AddTransportViewModel : ViewModelBase
     {
-        public ObservableCollection<Transport> TransportList { get; set; }
-
-        public AddTransportViewModel()
-        {
-            TransportList = new ObservableCollection<Transport>(TransportStore.Transports);
-        }
+        
 
     }
 }

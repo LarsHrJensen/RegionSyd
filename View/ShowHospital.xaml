@@ -50,14 +50,14 @@
 
             </Grid>
 
-            <ListView Margin="20" Width="500" Height="400" Name="HospitalListView">
+            <ListView Margin="20" Width="500" Height="400" Name="HospitalListView" ItemsSource="{Binding TransportList}">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Fra Hospital" Width="100" DisplayMemberBinding="{Binding Hospital}" />
-                        <GridViewColumn Header="Til Hospital" Width="100" DisplayMemberBinding="{Binding Hospital}" />
+                        <GridViewColumn Header="Fra Hospital" Width="100" DisplayMemberBinding="{Binding StartHospital.Name}" />
+                        <GridViewColumn Header="Til Hospital" Width="100" DisplayMemberBinding="{Binding DestinationHospital.Name}" />
                         <GridViewColumn Header="Patient" Width="100" DisplayMemberBinding="{Binding PatientName}" />
-                        <GridViewColumn Header="Dato" Width="100" DisplayMemberBinding="{Binding Date}" />
-                        <GridViewColumn Header="Tid" Width="100" DisplayMemberBinding="{Binding Time}" />
+                        <GridViewColumn Header="Afgang" Width="100" DisplayMemberBinding="{Binding ArrivalTime, StringFormat='{}{0:HH:mm}'}" />
+                        <GridViewColumn Header="Ankomst" Width="100" DisplayMemberBinding="{Binding TravelTime, StringFormat='{}{0:HH:mm}'}" />
                     </GridView>
                 </ListView.View>
             </ListView>

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RegionSyd.Model.Store;
 
 namespace RegionSyd.Model
 {
     public class Ambulance
     {
-        public int Id { get; set; }
+        public string Name { get; set; }
         public string Station {  get; set; }
         public string Status { get; set; }
         public List<Transport> Tasks {  get; set; }
 
-        public Ambulance(int id, string station, string status)
+        public Ambulance(string name, string station, string status)
         {
-            Id = id; 
+            Name = name;
             Station = station; 
             Status = status;
             Tasks = new List<Transport>();
@@ -24,23 +25,19 @@ namespace RegionSyd.Model
         public void AssignTask(Transport assign)
         {
             Tasks.Add(assign);
-            Console.WriteLine("Opgaven er oprettet");
+            MessageStore.Message = "Task successfully assigned.";
         }
 
         public void CompleteTask(Transport complete)
         {
             Tasks.Remove(complete);
-
-            // Update status of task 
-            //complete.Status = "Done";
-
-            Console.WriteLine("Opgaven er gennemført"); 
+            MessageStore.Message = "Task completed.";
         }
 
         public void RemoveTask(Transport remove)
         {
             Tasks.Remove(remove);
-            Console.WriteLine("Opgaven er slettet");
+            MessageStore.Message = "Task removed successfully.";
         }
     } 
 }

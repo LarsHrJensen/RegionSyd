@@ -15,6 +15,7 @@ namespace RegionSyd.ViewModel
 
         public NavigationCommand NavCreatePatient { get; }
         public NavigationCommand NavCreateTransport { get; }
+        public NavigationCommand NavOverview { get; }
 
 
         private ViewModelBase _currentViewModel;
@@ -32,14 +33,16 @@ namespace RegionSyd.ViewModel
         public MainViewModel()
         {
             // Landing viewmodel
-            //_currentViewModel = new AddTransportViewModel();
-            _currentViewModel = new AddPatientViewModel();
+            _currentViewModel = new OverviewViewModel();
+
+            // navigation command setup
             NavCreatePatient = new(navCreatePatient);
             NavCreateTransport = new(navCreateTransport);
+            NavOverview = new(navOverview);
 
         }
 
-
+        // Could be rewrote into lambda instead of this, would be prettier code, but less readable
         private void navCreatePatient()
         {
             CurrentViewModel = new AddPatientViewModel();
@@ -48,5 +51,12 @@ namespace RegionSyd.ViewModel
         {
             CurrentViewModel = new AddTransportViewModel();
         }
+        private void navOverview()
+        {
+            CurrentViewModel = new OverviewViewModel();
+        }
+        /* 
+         * Additional navigation methods go here!
+         */
     }
 }

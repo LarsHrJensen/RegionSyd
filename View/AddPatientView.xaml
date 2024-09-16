@@ -8,10 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White"
              >
-    <Grid>
+    <Grid Margin="{StaticResource DefaultMargin}">
         <StackPanel Orientation="Horizontal">
             
-        <Grid Margin="{StaticResource DefaultMargin}">
+        <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>

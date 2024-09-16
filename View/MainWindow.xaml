@@ -14,17 +14,23 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Button Content="CreatePatient" Command="{Binding NavCreatePatient}" Padding="{StaticResource SmallMargin}"/>
                 <Button Content="CreateTransport" Command="{Binding NavCreateTransport}" Padding="{StaticResource SmallMargin}"/>
+                <Button Content="Overview" Command="{Binding NavOverview}" Padding="{StaticResource SmallMargin}"/>
                 <!--<Button Content="AddPatient" Command="{Binding NavigateAddPatient}"/>-->
             </StackPanel>
         
             <ContentControl Content="{Binding CurrentViewModel}">
                 <ContentControl.Resources>
+                    
                     <DataTemplate DataType="{x:Type localviewmodels:AddPatientViewModel}">
                         <localviews:AddPatientView/>
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type localviewmodels:AddTransportViewModel}">
                         <localviews:AddTransportView/>
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type localviewmodels:OverviewViewModel}">
+                        <localviews:OverviewView/>
                     </DataTemplate>
                 
                 

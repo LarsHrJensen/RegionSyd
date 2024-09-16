@@ -11,7 +11,7 @@
         <ContentControl Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type localviewmodels:AddPatientViewModel}">
-                    <localviews:AddPatientView />
+                    <localviews:AddPatientView/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

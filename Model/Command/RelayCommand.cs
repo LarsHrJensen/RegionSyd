@@ -19,7 +19,9 @@ namespace RegionSyd.Model.Command
             MethodExecute = execute;
         } 
 
-        public void RasiseCanExecuteChanged()
+        // Raise all elements this is bound to
+        // Button for one
+        public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }

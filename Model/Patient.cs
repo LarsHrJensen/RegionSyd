@@ -8,16 +8,16 @@ namespace RegionSyd.Model
 {
     internal class Patient
     {
-    public char CPR { get; set; }
+    public string CPR { get; set; }
     public string FullName { get; set; }
     public string Status { get; set; }
 
 
-        public Patient(char cpr, string fullName, string status) 
+        public Patient(string cpr, string fullName, string status) 
         {
-         CPR = cpr;
-        FullName = fullName;
-        Status = status;
+            CPR = cpr;
+            FullName = fullName;
+            Status = status;
         }
 
 

@@ -2,8 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:RegionSyd"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-        <System:Int x:Key="TextBoxHeight">30</System:Int>
+        <sys:Double x:Key="TextboxHeight">40</sys:Double>
+        <!-- Statically defined height for textboxes, allows more consistent style throughout application. -->
+        
+        
+
     </Application.Resources>
 </Application>

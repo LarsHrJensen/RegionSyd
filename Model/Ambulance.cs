@@ -9,14 +9,14 @@ namespace RegionSyd.Model
 {
     public class Ambulance
     {
-        public string Name { get; set; }
+        public string ID { get; set; }
         public string Station {  get; set; }
         public string Status { get; set; }
         public List<Transport> Tasks {  get; set; }
 
-        public Ambulance(string name, string station, string status)
+        public Ambulance(string id, string station, string status)
         {
-            Name = name;
+            ID = id;
             Station = station; 
             Status = status;
             Tasks = new List<Transport>();

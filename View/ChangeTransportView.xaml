@@ -27,21 +27,21 @@
 
                 </Grid.RowDefinitions>
 
-                <ComboBox Grid.Row="0"  Grid.Column="1" Name="HospitalName" ItemsSource="{Binding}">
+                <ComboBox Grid.Row="0"  Grid.Column="1" Name="FromHospital" ItemsSource="{Binding Hospitals}">
                 </ComboBox>
-                <ComboBox Grid.Row="2"  Grid.Column="1" Name="Transport" ItemsSource="{Binding}"></ComboBox>
+                
+                <ComboBox Grid.Row="2"  Grid.Column="1" Name="ToHospital" ItemsSource="{Binding}">
+                </ComboBox>
 
-                <ComboBox Grid.Row="1"  Grid.Column="1" Name="Time" ItemsSource="{Binding}"></ComboBox>
+                <ComboBox Grid.Row="1"  Grid.Column="1" Name="Time" ItemsSource="{Binding}">
+                </ComboBox>
 
-                <Calendar Grid.Row="3" Grid.Column="1" Name="Kalender" HorizontalAlignment="Center" VerticalAlignment="Center" Width="180" Height="36"/>
-
-
-                <Label Content="Hospital name:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                <Label Content="Transport:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                <Calendar Grid.Row="3" Grid.Column="1" Name="Calender" HorizontalAlignment="Center" VerticalAlignment="Center" Width="180" Height="36"/>
+               
+                <Label Content="Fra hospital:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                <Label Content="Til hospital:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Tid:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Kalender:" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-
-
 
                 <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="4" Grid.Column="1" Content="Bekræft ændring" Command="{Binding SaveChanges}" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click"/>
 
@@ -53,7 +53,7 @@
                 <ListView.View >
                     <GridView>
 
-                        <GridViewColumn Header="Aktuelle kørsler" Width="150" DisplayMemberBinding="{Binding HospitalName}" />
+                        <GridViewColumn Header="Aktuelle kørsler" Width="150" DisplayMemberBinding="{Binding FromHospital}" />
                         <GridViewColumn Header="Ændret til: " Width="150" DisplayMemberBinding="{Binding ChangedProperty}" />
 
                     </GridView>

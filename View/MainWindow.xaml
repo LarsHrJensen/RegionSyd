@@ -32,7 +32,10 @@
                     <DataTemplate DataType="{x:Type localviewmodels:OverviewViewModel}">
                         <localviews:OverviewView/>
                     </DataTemplate>
-                
+
+                    <DataTemplate DataType="{x:Type localviewmodels:ChangeTransportViewModel}">
+                        <localviews:ChangeTransportView/>
+                    </DataTemplate>
                 
                 </ContentControl.Resources>
             </ContentControl>

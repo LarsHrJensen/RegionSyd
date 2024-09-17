@@ -33,7 +33,7 @@ namespace RegionSyd.ViewModel
         public MainViewModel()
         {
             // Landing viewmodel
-            _currentViewModel = new OverviewViewModel();
+            _currentViewModel = new ChangeTransportViewModel();
 
             // navigation command setup
             NavCreatePatient = new(navCreatePatient);

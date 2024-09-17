@@ -19,11 +19,11 @@
 
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
 
                 </Grid.RowDefinitions>
 
@@ -39,7 +39,7 @@
                 <Label Content="Hospital name:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Transport:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Tid:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                <Label Content="Kalender:" Grid.Row="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,32,30,0" />
+                <Label Content="Kalender:" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
 
 
 

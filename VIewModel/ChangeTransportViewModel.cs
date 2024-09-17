@@ -11,6 +11,6 @@ namespace RegionSyd.VIewModel
     public class ChangeTransportViewModel : ViewModelBase 
     {
      public Transport CurrentTransport {  get; set; }
-     public 
+     
     }
 }

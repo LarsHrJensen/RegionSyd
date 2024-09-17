@@ -19,6 +19,9 @@ namespace RegionSyd.ViewModel
         public ObservableCollection<Hospital> Hospitals { get; }
         public ObservableCollection<Transport> Transports { get; }
 
+        MainViewModel mainViewmodel;
+
+
         public OverviewViewModel()
         {
             Ambulances = new(AmbulanceRepository.GetInstance().GetAll());
@@ -26,5 +29,21 @@ namespace RegionSyd.ViewModel
             Transports = new(TransportRepository.GetInstance().GetAll());
             Hospitals = new(HospitalStore.Hospitals);
         }
+
+        public OverviewViewModel(MainViewModel mv)
+        {
+            Ambulances = new(AmbulanceRepository.GetInstance().GetAll());
+            Patients = new(PatientRepository.GetInstance().GetAll());
+            Transports = new(TransportRepository.GetInstance().GetAll());
+            Hospitals = new(HospitalStore.Hospitals);
+            mainViewmodel = mv;
+        }
+
+        public void NavigateChangeAmbulance(Ambulance selectedAmbulance)
+        {
+            
+        }
+
+        
     }
 }

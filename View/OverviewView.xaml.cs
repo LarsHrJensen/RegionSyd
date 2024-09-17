@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using RegionSyd.Model;
+using RegionSyd.ViewModel;
 namespace RegionSyd.View
 {
     /// <summary>
@@ -23,6 +25,23 @@ namespace RegionSyd.View
         public OverviewView()
         {
             InitializeComponent();
+            
+            // Set listeners
+            //HospitalListOverview.SelectionChanged += ()
+            AmbulanceListOverview.SelectionChanged += (obj, e) =>
+            {
+                ListView lv = (ListView)obj;
+
+                Ambulance selected = (Ambulance)lv.SelectedValue;
+
+                OverviewViewModel ovm = (OverviewViewModel)DataContext;
+                
+
+            };
+            //PatientListOverview
+            //TransportListOverview
+
+
         }
     }
 }

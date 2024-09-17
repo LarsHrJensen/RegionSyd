@@ -9,10 +9,10 @@ namespace RegionSyd.Model
 {
     public class Ambulance
     {
-        public string Name { get; set; }
-        public string Station {  get; set; }
-        public string Status { get; set; }
-        public List<Transport> Tasks {  get; set; }
+        public string Name { get; }
+        public string Station {  get; }
+        public string Status { get; }
+        public List<Transport> Tasks {  get; }
 
         public Ambulance(string name, string station, string status)
         {
@@ -38,6 +38,11 @@ namespace RegionSyd.Model
         {
             Tasks.Remove(remove);
             MessageStore.Message = "Task removed successfully.";
+        }
+
+        public List<Transport> GetTasks()
+        {
+            return Tasks;
         }
     } 
 }

@@ -9,6 +9,8 @@
              Background="White"
              >
     <Grid Margin="{StaticResource DefaultMargin}">
+        <Grid.RowDefinitions>
             
+        </Grid.RowDefinitions>
     </Grid>
 </UserControl>

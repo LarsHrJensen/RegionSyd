@@ -13,4 +13,4 @@
 # Ignore macOS system files
 .DS_Store
 
-appconfig.json
+*/appconfig.json

@@ -1,5 +1,3 @@
-# Visual Studio specific files
-.vs/
 *.suo
 *.user
 *.userosscache
@@ -14,3 +12,5 @@
 
 # Ignore macOS system files
 .DS_Store
+
+appconfig.json

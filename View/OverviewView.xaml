@@ -6,6 +6,22 @@
              xmlns:local="clr-namespace:RegionSyd.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- Make listviews appear as hyperlinks -->
+        <Style x:Key="HyperlinkListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="TextBlock.TextDecorations" Value="None"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Blue"/>
+                    <Setter Property="TextBlock.TextDecorations" Value="Underline"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid Margin="{StaticResource DefaultMargin}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -19,7 +35,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Ambulances}" Margin="{StaticResource SmallMargin}" Name="AmbulanceListOverview">
+        <ListView ItemContainerStyle="{StaticResource HyperlinkListViewItemStyle}" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Ambulances}" Margin="{StaticResource SmallMargin}" Name="AmbulanceListOverview">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -29,7 +45,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Patients}" Margin="{StaticResource SmallMargin}" Name="PatientListOverview">
+        <ListView ItemContainerStyle="{StaticResource HyperlinkListViewItemStyle}" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Patients}" Margin="{StaticResource SmallMargin}" Name="PatientListOverview">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -39,7 +55,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Hospitals}" Margin="{StaticResource SmallMargin}" Name="HospitalListOverview">
+        <ListView ItemContainerStyle="{StaticResource HyperlinkListViewItemStyle}" Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Hospitals}" Margin="{StaticResource SmallMargin}" Name="HospitalListOverview">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -49,7 +65,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView Grid.Column="3" Grid.Row="1" ItemsSource="{Binding Transports}" Margin="{StaticResource SmallMargin}" Name="TransportListOverview">
+        <ListView ItemContainerStyle="{StaticResource HyperlinkListViewItemStyle}" Grid.Column="3" Grid.Row="1" ItemsSource="{Binding Transports}" Margin="{StaticResource SmallMargin}" Name="TransportListOverview">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

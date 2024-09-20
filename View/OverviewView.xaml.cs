@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,21 +26,40 @@ namespace RegionSyd.View
         public OverviewView()
         {
             InitializeComponent();
-            
+
+            OverviewViewModel ovm = OverviewViewModel.Instance;
+
             // Set listeners
-            //HospitalListOverview.SelectionChanged += ()
+
+            // TODO : Rewrite into generic
+
+            ListView Skibidi = new();
+
+
+
+            HospitalListOverview.SelectionChanged += (obj, e) =>
+            {
+                ListView lv = (ListView)obj;
+                
+            };
             AmbulanceListOverview.SelectionChanged += (obj, e) =>
             {
                 ListView lv = (ListView)obj;
-
                 Ambulance selected = (Ambulance)lv.SelectedValue;
-
-                OverviewViewModel ovm = (OverviewViewModel)DataContext;
-                
-
+                ovm.NavigateChangeAmbulance(selected);
             };
-            //PatientListOverview
-            //TransportListOverview
+            PatientListOverview.SelectionChanged += (obj, e) =>
+            {
+                ListView lv = (ListView)obj;
+                Patient selected = (Patient)lv.SelectedValue;
+                ovm.NavigateChangePatient(selected);
+            };
+            TransportListOverview.SelectionChanged += (obj, e) =>
+            {
+                ListView lv = (ListView)obj;
+                Transport transport = (Transport)lv.SelectedValue;
+                ovm.NavigateChangeTransport(transport);
+            };
 
 
         }

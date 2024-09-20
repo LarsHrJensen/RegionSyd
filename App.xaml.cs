@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 
+
 using RegionSyd.View;
 using RegionSyd.Model;
 
@@ -27,7 +28,7 @@ namespace RegionSyd
             // add hospitals for testing
             Hospital rigs = new("Rigshospitalet", "Blegdamsvej 9", "København 2100", "Region Hovedstaden");
             Hospital ouh = new("Odense Universitetshospital", "J. B. Winsløws Vej 4", "Odense 5000", "Region Syddanmark");
-            Hospital auh = new("Aarhus Universitetshospital", "Palle Juul-Jensens Boulevard 99", " Aarhus N 8200", "Region Midtjylland");
+            Hospital auh = new("Aarhus Universitetshospital", "Palle Juul-Jensens Boulevard 99", "Aarhus N 8200", "Region Midtjylland");
             HospitalStore.Hospitals.Add(rigs);
             HospitalStore.Hospitals.Add(ouh);
             HospitalStore.Hospitals.Add(auh);

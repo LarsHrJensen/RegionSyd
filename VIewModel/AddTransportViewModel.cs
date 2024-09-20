@@ -99,7 +99,6 @@ namespace RegionSyd.ViewModel
             
             TransportRepository repo = TransportRepository.GetInstance();
 
-
             Transport t = new(_fromHospital, _toHospital, (DateTime)_arrival, _patient);
 
             repo.Add(t);

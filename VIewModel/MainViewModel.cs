@@ -1,4 +1,5 @@
-﻿using RegionSyd.Model.Command;
+﻿using RegionSyd.Model;
+using RegionSyd.Model.Command;
 using RegionSyd.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,6 @@ namespace RegionSyd.ViewModel
             }
         }
 
-
         public MainViewModel()
         {
             // Landing viewmodel
@@ -57,7 +57,26 @@ namespace RegionSyd.ViewModel
         }
 
 
+        
+        public void NavChangeAmbulance(Ambulance amb)
+        {
+            CurrentViewModel = new ChangeAmbulanceViewModel(amb);
+        }
 
+        public void NavChangePatient(Patient patient)
+        {
+            CurrentViewModel = new ChangePatientViewModel(patient);
+        }
+
+        public void NavChangePatient(Transport transport)
+        {
+
+        }
+
+        public void NavHospitalOverview(Hospital hospital)
+        {
+
+        }
         /* 
          * Additional navigation methods go here!
          */

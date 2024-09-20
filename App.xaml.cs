@@ -8,6 +8,9 @@ using System.Windows;
 
 using RegionSyd.View;
 using RegionSyd.Model;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace RegionSyd
 {
@@ -57,6 +60,16 @@ namespace RegionSyd
             TransportRepository transportRepo = TransportRepository.GetInstance();
             transportRepo.Add(t1);
             transportRepo.Add(t2);
+
+            // 🤡🤡🤡🤡🤡
+            string ProjectRootPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName;
+            string appsettingsFilePath = ProjectRootPath + "/appconfig.json";
+
+
+            IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile(appsettingsFilePath).Build();
+
+            string? ConnectionString = config.GetConnectionString("SQLAuth");
+
 
             // setup main window 
             MainWindow mw = new();

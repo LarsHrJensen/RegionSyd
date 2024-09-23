@@ -16,7 +16,9 @@ namespace RegionSyd.ViewModel
         public NavigationCommand NavCreatePatient { get; }
         public NavigationCommand NavCreateTransport { get; }
         public NavigationCommand NavOverview { get; }
+        public NavigationCommand NavCreateAmbulance { get; }
 
+        List<string> Statuses;
 
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -33,12 +35,19 @@ namespace RegionSyd.ViewModel
         public MainViewModel()
         {
             // Landing viewmodel
-            _currentViewModel = new ChangeTransportViewModel();
+             
+            Statuses = new List<string>();
+            Statuses.Add("Aktiv");
+            Statuses.Add("Standby");
+            Statuses.Add("Inaktiv");
+            _currentViewModel = new AddAmbulanceViewModel(Statuses);
+
 
             // navigation command setup
             NavCreatePatient = new(navCreatePatient);
             NavCreateTransport = new(navCreateTransport);
             NavOverview = new(navOverview);
+            NavCreateAmbulance = new(navCreateAmbulance);
 
         }
 
@@ -55,6 +64,12 @@ namespace RegionSyd.ViewModel
         {
             CurrentViewModel = new OverviewViewModel();
         }
+
+        private void navCreateAmbulance()
+        {
+            CurrentViewModel = new AddAmbulanceViewModel(Statuses);
+        }
+
         /* 
          * Additional navigation methods go here!
          */

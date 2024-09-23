@@ -10,14 +10,14 @@ namespace RegionSyd.Model
     public class Ambulance
     {
         public string Name { get; set; }
-        public string Station {  get; set; }
+        public Hospital Hospital {  get; set; }
         public string Status { get; set; }
         public List<Transport> Tasks {  get; set; }
 
-        public Ambulance(string name, string station, string status)
+        public Ambulance(string name, Hospital hospital, string status)
         {
             Name = name;
-            Station = station; 
+            Hospital = hospital; 
             Status = status;
             Tasks = new List<Transport>();
         }

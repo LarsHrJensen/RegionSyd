@@ -23,6 +23,7 @@ namespace RegionSyd.ViewModel
         {
             Hospitals = HospitalStore.Hospitals;
         }
+
     }
     
 

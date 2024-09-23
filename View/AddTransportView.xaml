@@ -52,15 +52,20 @@
                 <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Patients}" Margin="{StaticResource SmallMargin}" SelectedItem="{Binding Patient, Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding FullName}"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding FullName}"/>
+                                <TextBlock Text="{Binding Id}"/>
+                            </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
 
-                <Label Grid.Row="3" Grid.Column="0" Content="Time Of Arrival:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                <DatePicker Margin="{StaticResource SmallMargin}" Grid.Row="3" Grid.Column="1" Name="SelectedDate" SelectedDate="{Binding Arrival, Mode=TwoWay}"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Date Of Arrival:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <DatePicker VerticalAlignment="Center" Margin="{StaticResource SmallMargin}" Grid.Row="3" Grid.Column="1" Name="SelectedDate" SelectedDate="{Binding Arrival, Mode=TwoWay}"/>
 
-                <Button Content="Create Transport" Grid.Row="4" Grid.Column="1" Command="{Binding CreateTransport}" Margin="{StaticResource SmallMargin}"/>
+                <Label Name="TimePickerLabel" Grid.Row="4" Grid.Column="0" Content="Time of Arrival:" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <TextBox Name="TimePicker" Grid.Row="4" Grid.Column="1" Margin="{StaticResource SmallMargin}" Text="{Binding ArrivalText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" TextAlignment="Center" />
+                <Button Content="Create Transport" Grid.Row="5" Grid.Column="1" Command="{Binding CreateTransport}" Margin="{StaticResource SmallMargin}"/>
 
             </Grid>
             <ListView Width="300" ItemsSource="{Binding Transports}">

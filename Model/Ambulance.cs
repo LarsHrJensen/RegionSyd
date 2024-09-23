@@ -9,6 +9,7 @@ namespace RegionSyd.Model
 {
     public class Ambulance
     {
+        public int Id { get; private set; }
         public string Name { get; }
         public string Station {  get; }
         public string Status { get; }
@@ -20,6 +21,22 @@ namespace RegionSyd.Model
             Station = station; 
             Status = status;
             Tasks = new List<Transport>();
+        }
+
+        public Ambulance(string name, string station, string status, int id=-1)
+        {
+            Name = name;
+            Station = station;
+            Status = status;
+            Tasks = new List<Transport>();
+            if (id > 0) Id = id;
+        }
+
+        // Idea is, we don't know Id before added to DB, Insert query results in identity 
+        // So we can save the int as result, and put it here on the object itself.
+        public void SetId(int id)
+        {
+            Id = id;
         }
 
         public void AssignTask(Transport assign)

@@ -1,4 +1,5 @@
-﻿using RegionSyd.Model;
+﻿using Microsoft.Identity.Client;
+using RegionSyd.Model;
 using RegionSyd.Model.Command;
 using RegionSyd.ViewModel;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace RegionSyd.ViewModel
 {
@@ -18,6 +20,7 @@ namespace RegionSyd.ViewModel
         public NavigationCommand NavCreateTransport { get; }
         public NavigationCommand NavOverview { get; }
 
+        private readonly IConfiguration _config;
 
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -30,16 +33,16 @@ namespace RegionSyd.ViewModel
             }
         }
 
-        public MainViewModel()
+        public MainViewModel(IConfiguration config)
         {
             // Landing viewmodel
-            _currentViewModel = new OverviewViewModel();
+            _currentViewModel = new OverviewViewModel(this, config);
 
             // navigation command setup
             NavCreatePatient = new(navCreatePatient);
             NavCreateTransport = new(navCreateTransport);
             NavOverview = new(navOverview);
-
+            _config = config;
         }
 
         // Could be rewrote into lambda instead of this, would be prettier code, but less readable
@@ -49,11 +52,11 @@ namespace RegionSyd.ViewModel
         }
         private void navCreateTransport()
         {
-            CurrentViewModel = new AddTransportViewModel();
+            CurrentViewModel = new AddTransportViewModel(_config);
         }
         private void navOverview()
         {
-            CurrentViewModel = new OverviewViewModel();
+            CurrentViewModel = new OverviewViewModel(this, _config);
         }
 
 

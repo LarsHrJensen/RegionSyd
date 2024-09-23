@@ -6,10 +6,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Navigation;
+using Microsoft.Extensions.Configuration;
 using RegionSyd.Model;
 using RegionSyd.Model.Command;
 using RegionSyd.Model.Repository;
 using RegionSyd.Model.Store;
+using RegionSyd.Model.Helper;
+using Validation = RegionSyd.Model.Helper.Validation;
 
 namespace RegionSyd.ViewModel
 {
@@ -17,13 +22,13 @@ namespace RegionSyd.ViewModel
     {
 
         Hospital? _fromHospital;
-        public Hospital? FromHospital { 
-            get { return _fromHospital; } 
+        public Hospital? FromHospital {
+            get { return _fromHospital; }
             set
             {
                 _fromHospital = value;
                 CreateTransport.RaiseCanExecuteChanged();
-            } 
+            }
         }
 
         Hospital? _toHospital;
@@ -38,7 +43,7 @@ namespace RegionSyd.ViewModel
         }
 
         Patient? _patient;
-        public Patient? Patient { 
+        public Patient? Patient {
             get { return _patient; }
             set
             {
@@ -58,26 +63,41 @@ namespace RegionSyd.ViewModel
             }
         }
 
+        string _arrivalText;
+        public string ArrivalText
+        {
+            get { return _arrivalText; }
+            set
+            {
+                _arrivalText = value;
+                CreateTransport.RaiseCanExecuteChanged();
+            }
+        }
+
+
 
         public ObservableCollection<Hospital> Hospitals { get; }
         public ObservableCollection<Patient> Patients { get; }
-
-        private ObservableCollection<Transport> _transports;
-        public ObservableCollection<Transport> Transports { get { return _transports; } }
+        public ObservableCollection<Transport> Transports { get; private set; }
 
         public RelayCommand CreateTransport { get; }
 
 
+        HospitalRepository _hospitalRepo;
+        PatientRepository _patientRepository;
+        TransportRepository _transportRepository;
 
-        public AddTransportViewModel()
+
+        public AddTransportViewModel(IConfiguration config)
         {
-            Hospitals = new ObservableCollection<Hospital>(HospitalStore.Hospitals);
+            _hospitalRepo = new HospitalRepository(config);
+            _patientRepository = new PatientRepository(config);
+            _transportRepository = new TransportRepository(config);
 
-            // Get patientrepository instance, get patients from instance and create observable collection from list<patient>
-            Patients = new(PatientRepository.GetInstance().GetAll());
 
-            _transports = new(TransportRepository.GetInstance().GetAll());
-            
+            Hospitals = new ObservableCollection<Hospital>(_hospitalRepo.GetAll());
+            Patients = new ObservableCollection<Patient>(_patientRepository.GetAll());
+            Transports = new ObservableCollection<Transport>(_transportRepository.GetAll());
 
             CreateTransport = new(CanCreateTransport, CreateTransportMethod);
         }
@@ -89,23 +109,34 @@ namespace RegionSyd.ViewModel
             if (_fromHospital == null || _toHospital == null) return false;
             if (_patient == null) return false;
             if (_arrival == null) return false;
+            if (_arrivalText == null) return false;
+            if (!Validation.ValidHourMinute(_arrivalText)) return false;
 
             return true;
         }
 
         public void CreateTransportMethod(object param)
         {
-            MessageStore.Message = "Successfully created transport.";
-            
-            TransportRepository repo = TransportRepository.GetInstance();
+            Debug.WriteLine("yo?");
 
-            Transport t = new(_fromHospital, _toHospital, (DateTime)_arrival, _patient);
+            TransportRepository repo = _transportRepository;
+            if(repo == null)
+            {
+                throw new ArgumentNullException("Transport repo not initialized");
+            }
 
-            repo.Add(t);
+            DateOnly date = DateOnly.FromDateTime((DateTime)_arrival);
+            TimeOnly time = TimeOnly.Parse(_arrivalText);
 
-            _transports = new(repo.GetAll());
+            DateTime timeOfArrival = date.ToDateTime(time);
 
-            // raise opc so right list updates
+
+            Transport t = new(_fromHospital, _toHospital, timeOfArrival, _patient);
+
+            repo.Insert(t);
+
+            Transports = new(repo.GetAll());
+
             OnPropertyChanged(nameof(Transports));
 
             ResetFields();
@@ -117,11 +148,13 @@ namespace RegionSyd.ViewModel
             _toHospital = null;
             _patient = null;
             _arrival = null;
+            _arrivalText = null;
 
             OnPropertyChanged(nameof(FromHospital));
             OnPropertyChanged(nameof(ToHospital));
             OnPropertyChanged(nameof(Patient));
             OnPropertyChanged(nameof(Arrival));
+            OnPropertyChanged(nameof(ArrivalText));
 
         }
     }

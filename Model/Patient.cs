@@ -11,12 +11,14 @@ namespace RegionSyd.Model
         public string CPR { get; set; }
         public string FullName { get; set; }
         public string Status { get; set; }
+        public int Id { get; private set; }
 
-        public Patient(string cpr, string fullName, string status) 
+        public Patient(string cpr, string fullName, string status, int id=-1) 
         {
             CPR = cpr;
             FullName = fullName;
             Status = status;
+            if (id > 0) Id = id;
         }
 
     }

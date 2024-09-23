@@ -17,6 +17,7 @@ using RegionSyd.Model.Store;
 using RegionSyd.Model.Repository;
 using RegionSyd.Model.Repository.Repository;
 using System.Diagnostics;
+using Microsoft.Extensions.Configuration;
 
 namespace RegionSyd.View
 {
@@ -28,10 +29,10 @@ namespace RegionSyd.View
 
         
 
-        public MainWindow()
+        public MainWindow(IConfiguration config)
         {
             
-            MainViewModel mainViewModel = new MainViewModel();
+            MainViewModel mainViewModel = new MainViewModel(config);
             this.DataContext = mainViewModel;
             
             // Message shower

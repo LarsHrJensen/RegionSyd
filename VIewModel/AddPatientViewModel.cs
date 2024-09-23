@@ -60,9 +60,9 @@ namespace RegionSyd.ViewModel
 
         public AddPatientViewModel()
         {
-            patientRepo = PatientRepository.GetInstance();
-            AddedPatients = new(patientRepo.GetAll());
-            CreatePatient = new(IsValidPatientData, CreateNewPatient);
+            //patientRepo = PatientRepository.GetInstance();
+            //AddedPatients = new(patientRepo.GetAll());
+            //CreatePatient = new(IsValidPatientData, CreateNewPatient);
         }
 
         public bool IsValidPatientData(object param)
@@ -81,13 +81,13 @@ namespace RegionSyd.ViewModel
 
         public void CreateNewPatient(object param)
         {
-            PatientRepository repo = PatientRepository.GetInstance();
+            //PatientRepository repo = PatientRepository.GetInstance();
 
             Patient patient = new Patient(PatientCPR, PatientName, PatientActuality);
 
-            repo.Add(patient);
+            //repo.Add(patient);
 
-            AddedPatients = new(repo.GetAll());
+            //AddedPatients = new(repo.GetAll());
             OnPropertyChanged(nameof(AddedPatients));
 
             MessageStore.Message = "Patient added successfully.";

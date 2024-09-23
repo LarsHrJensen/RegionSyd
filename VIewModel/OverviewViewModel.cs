@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using RegionSyd.Model;
 using RegionSyd.Model.Repository;
 using RegionSyd.Model.Repository.Repository;
@@ -21,29 +23,29 @@ namespace RegionSyd.ViewModel
         public ObservableCollection<Hospital> Hospitals { get; }
         public ObservableCollection<Transport> Transports { get; }
 
+        IConfiguration _configuration;
+
         MainViewModel mainViewmodel;
 
         // Make instance availabel to codebehind for clickable listview edit things
         private static OverviewViewModel _instance;
         public static OverviewViewModel Instance { get { return _instance; } }
 
-        public OverviewViewModel()
+        public OverviewViewModel(MainViewModel mv, IConfiguration config)
         {
-            Ambulances = new(AmbulanceRepository.GetInstance().GetAll());
-            Patients = new(PatientRepository.GetInstance().GetAll());
-            Transports = new(TransportRepository.GetInstance().GetAll());
-            Hospitals = new(HospitalStore.Hospitals);
-            _instance = this;
-        }
-
-        public OverviewViewModel(MainViewModel mv)
-        {
-            Ambulances = new(AmbulanceRepository.GetInstance().GetAll());
-            Patients = new(PatientRepository.GetInstance().GetAll());
-            Transports = new(TransportRepository.GetInstance().GetAll());
-            Hospitals = new(HospitalStore.Hospitals);
             mainViewmodel = mv;
             _instance = this;
+            _configuration = config;
+
+            AmbulanceRepository ambulanceRepository = new(config);
+            PatientRepository patientRepository = new(config);
+            HospitalRepository hospitalRepository = new(config);
+            TransportRepository transportRepository = new(config);
+
+            Ambulances = new ObservableCollection<Ambulance>(ambulanceRepository.GetAll());
+            Hospitals = new ObservableCollection<Hospital>(hospitalRepository.GetAll());
+            Transports = new ObservableCollection<Transport> (transportRepository.GetAll());
+            Patients = new ObservableCollection<Patient>(patientRepository.GetAll());
         }
 
         public void NavigateChangeAmbulance(Ambulance selectedAmbulance)

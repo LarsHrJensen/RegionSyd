@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using RegionSyd.Model.Store;
 using RegionSyd.ViewModel;
 
-namespace RegionSyd.VIewModel
+namespace RegionSyd.ViewModel
 {
     internal class HospitalViewModel : ViewModelBase
     {
@@ -15,7 +15,6 @@ namespace RegionSyd.VIewModel
 
         public HospitalViewModel()
         {
-            HospitalList = new ObservableCollection<Hospital>(HospitalStore.Hospitals);
         }
     }
     

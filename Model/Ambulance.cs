@@ -11,22 +11,22 @@ namespace RegionSyd.Model
     {
         public int Id { get; private set; }
         public string Name { get; }
-        public string Station {  get; }
+        public Hospital Hospital  {  get; }
         public string Status { get; }
         public List<Transport> Tasks {  get; }
 
-        public Ambulance(string id, string station, string status)
+        public Ambulance(int id, Hospital hospital, string status)
         {
-            ID = id;
-            Station = station; 
+            Id = id;
+            Hospital= hospital; 
             Status = status;
             Tasks = new List<Transport>();
         }
 
-        public Ambulance(string name, string station, string status, int id=-1)
+        public Ambulance(string name, Hospital hospital, string status, int id=-1)
         {
             Name = name;
-            Station = station;
+            Hospital = hospital;
             Status = status;
             Tasks = new List<Transport>();
             if (id > 0) Id = id;

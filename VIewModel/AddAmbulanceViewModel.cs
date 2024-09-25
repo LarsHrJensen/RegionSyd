@@ -9,6 +9,7 @@ using RegionSyd.Model.Command;
 using RegionSyd.Model.Repository;
 using RegionSyd.Model.Repository.Repository;
 using RegionSyd.Model.Store;
+using Microsoft.Extensions.Configuration;
 
 namespace RegionSyd.ViewModel
 {
@@ -18,24 +19,26 @@ namespace RegionSyd.ViewModel
      public string AmbulanceStatus { get; set; }
      public Hospital AmbulanceHospital { get; set; }
      public List<string> Statuses { get;}
+     private IConfiguration _configuration;
 
      public List<Ambulance> Ambulances { get; }
 
-        public AddAmbulanceViewModel(List<string> statuses)
-        {
-            Statuses = statuses;
-        }
-
-        public RelayCommand CreateAmbulance { get; set; }
+       public RelayCommand CreateAmbulance { get; set; }
         public ObservableCollection<Ambulance> AddedAmbulances { get; set; }
         AmbulanceRepository ambulanceRepo;
+        HospitalRepository hospitalRepo;
+
+        public ObservableCollection<Hospital> Hospitals {get;}
 
 
-        public AddAmbulanceViewModel()
+        public AddAmbulanceViewModel(IConfiguration config, List<string> statuses)
         {
-            ambulanceRepo = AmbulanceRepository.GetInstance();
-            AddedAmbulances = new(ambulanceRepo.GetAll());
             CreateAmbulance = new(IsValidAmbulanceData, CreateNewAmbulance);
+            _configuration = config;
+            Statuses = statuses;
+            ambulanceRepo = new AmbulanceRepository(config);
+            hospitalRepo = new HospitalRepository(config);
+            Hospitals = new ObservableCollection<Hospital>(hospitalRepo.GetAll());
         }
 
         public bool IsValidAmbulanceData(object param)
@@ -52,11 +55,11 @@ namespace RegionSyd.ViewModel
 
         public void CreateNewAmbulance(object param)
         {
-            AmbulanceRepository repo = AmbulanceRepository.GetInstance();
+            AmbulanceRepository repo = new AmbulanceRepository(_configuration);
 
             Ambulance ambulance = new Ambulance(AmbulanceName, AmbulanceHospital, AmbulanceStatus);
 
-            repo.Add(ambulance);
+            repo.Insert(ambulance);
 
             AddedAmbulances = new(repo.GetAll());
             OnPropertyChanged(nameof(AddedAmbulances));

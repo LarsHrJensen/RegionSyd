@@ -15,6 +15,7 @@ namespace RegionSyd.Model.Repository.Repository
         SqlConnection _connection;
         string _connectionString;
         string _tableName;
+        IConfiguration _configuration;
 
         // I f*ing hate dependency injection, give me lethal injection instead
         public AmbulanceRepository(IConfiguration config, string ambulanceTableName="Ambulances")
@@ -52,8 +53,14 @@ namespace RegionSyd.Model.Repository.Repository
                 {
                     while (reader.Read())
                     {
+                        HospitalRepository hospitalRepository = new HospitalRepository(_configuration);
+
+                        // Refactor in SQL and here to become hospital ID instead
+
+                        Hospital hospital = hospitalRepository.GetById((int)reader["Station"]);
+
                         Ambulance amb = new Ambulance(
-                            (string)reader["Name"], (string)reader["Station"],
+                            (string)reader["Name"], hospital,
                             (string)reader["Status"], (int)reader["Id"]
                         );
                         result.Add( amb );

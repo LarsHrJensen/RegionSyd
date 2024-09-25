@@ -7,9 +7,8 @@
     "**/obj",
     "**/platforms"
   ],
-  "ConnectionStrings" : 
-    {
-      "WinAuth": "",
-      "SQLAuth":  ""
-    }
+  "ConnectionStrings": {
+    "WinAuth": "",
+    "SQLAuth": "Server=grupp3.database.windows.net;Database=RegionSyd;Trusted_Connection=False;User ID=Gruppe3;Password=Hejmeddig24;"
+  }
 }

@@ -8,6 +8,8 @@ using RegionSyd.Model.Repository;
 using RegionSyd.Model;
 using System.Windows.Controls;
 using RegionSyd.ViewModel;
+using Microsoft.Extensions.Configuration;
+
 
 namespace RegionSyd.VIewModel
 {
@@ -15,9 +17,15 @@ namespace RegionSyd.VIewModel
     {
         public ObservableCollection<Transport> TransportList { get; set; }
 
-        public ShowHospitalViewModel()
+        IConfiguration _configuration;
+
+        public ShowHospitalViewModel(IConfiguration config)
         {
-            TransportList = new ObservableCollection<Transport>(TransportRepository.GetInstance().GetAll());
+            _configuration = config;
+
+            TransportRepository repo = new TransportRepository(config);
+
+            TransportList = new ObservableCollection<Transport>(repo.GetAll());
         }
     }
 }

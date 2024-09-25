@@ -27,7 +27,7 @@ namespace RegionSyd.Model
                 {
                     if (item is Ambulance ambulance)
                     {
-                        writer.WriteLine($"{ambulance.Station},{ambulance.Status}");
+                        writer.WriteLine($"{ambulance.Hospital},{ambulance.Status}");
                     }
 
                     else if (item is Transport transport)

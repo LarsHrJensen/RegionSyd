@@ -96,7 +96,7 @@ namespace RegionSyd.ViewModel
 
         private void navCreateAmbulance()
         {
-            CurrentViewModel = new AddAmbulanceViewModel(Statuses);
+            CurrentViewModel = new AddAmbulanceViewModel(_config, Statuses);
         }
 
         /* 

@@ -16,11 +16,14 @@ namespace RegionSyd.Model.Repository.Repository
         string _connectionString;
         string _tableName;
 
+        IConfiguration _configuration;
+
         // I f*ing hate dependency injection, give me lethal injection instead
         public AmbulanceRepository(IConfiguration config, string ambulanceTableName="Ambulances")
         {
             _connectionString = config.GetConnectionString("SQLAuth");
             _tableName = ambulanceTableName;
+            _configuration = config;
         }
 
         public void Delete(Ambulance entity)
@@ -52,8 +55,13 @@ namespace RegionSyd.Model.Repository.Repository
                 {
                     while (reader.Read())
                     {
+                        HospitalRepository hospitalRepo = new HospitalRepository(_configuration);
+
+                        Hospital hospital = hospitalRepo.GetById((int)reader["Station"]);
+
+
                         Ambulance amb = new Ambulance(
-                            (string)reader["Name"], (string)reader["Station"],
+                            (string)reader["Name"], hospital,
                             (string)reader["Status"], (int)reader["Id"]
                         );
                         result.Add( amb );

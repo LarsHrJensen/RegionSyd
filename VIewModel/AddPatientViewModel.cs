@@ -11,6 +11,7 @@ using RegionSyd.Model.Repository;
 using RegionSyd.Model.Message;
 using System.Diagnostics;
 using RegionSyd.Model.Store;
+using Microsoft.Extensions.Configuration;
 
 namespace RegionSyd.ViewModel
 {
@@ -57,12 +58,14 @@ namespace RegionSyd.ViewModel
 
         public ObservableCollection<Patient> AddedPatients { get; set; }
         PatientRepository patientRepo;
+        IConfiguration _configuration;
 
-        public AddPatientViewModel()
+        public AddPatientViewModel(IConfiguration config)
         {
-            //patientRepo = PatientRepository.GetInstance();
-            //AddedPatients = new(patientRepo.GetAll());
-            //CreatePatient = new(IsValidPatientData, CreateNewPatient);
+            _configuration = config;
+            patientRepo = new PatientRepository(config);
+            AddedPatients = new(patientRepo.GetAll());
+            CreatePatient = new(IsValidPatientData, CreateNewPatient);
         }
 
         public bool IsValidPatientData(object param)

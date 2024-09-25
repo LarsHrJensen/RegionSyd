@@ -1,4 +1,6 @@
-﻿using RegionSyd.Model;
+﻿using Microsoft.Extensions.Configuration;
+using RegionSyd.Model;
+using RegionSyd.Model.Repository;
 using RegionSyd.Model.Store;
 using RegionSyd.ViewModel;
 using System;
@@ -6,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+
 
 namespace RegionSyd.ViewModel
 {
@@ -17,11 +21,14 @@ namespace RegionSyd.ViewModel
          public int TravelTime {  get; set; }
          public DateTime Arrival { get; set; }
     
-         public List<Hospital> Hospitals { get;}
+         public ObservableCollection<Hospital> Hospitals { get;}
      
-        public ChangeTransportViewModel() 
+        public ChangeTransportViewModel(IConfiguration config) 
         {
-            Hospitals = HospitalStore.Hospitals;
+            HospitalRepository repo = new HospitalRepository(config);
+
+
+            Hospitals = new ObservableCollection<Hospital>(repo.GetAll());
         }
 
     }

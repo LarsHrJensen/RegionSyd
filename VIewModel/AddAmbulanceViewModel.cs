@@ -9,6 +9,7 @@ using RegionSyd.Model.Command;
 using RegionSyd.Model.Repository;
 using RegionSyd.Model.Repository.Repository;
 using RegionSyd.Model.Store;
+using Microsoft.Extensions.Configuration;
 
 namespace RegionSyd.ViewModel
 {
@@ -21,19 +22,19 @@ namespace RegionSyd.ViewModel
 
      public List<Ambulance> Ambulances { get; }
 
-        public AddAmbulanceViewModel(List<string> statuses)
-        {
-            Statuses = statuses;
-        }
 
         public RelayCommand CreateAmbulance { get; set; }
         public ObservableCollection<Ambulance> AddedAmbulances { get; set; }
         AmbulanceRepository ambulanceRepo;
 
+        IConfiguration _configuration;
 
-        public AddAmbulanceViewModel()
+
+        public AddAmbulanceViewModel(IConfiguration config,  List<string> statuses)
         {
-            ambulanceRepo = AmbulanceRepository.GetInstance();
+            _configuration = config;
+            Statuses = statuses;
+            ambulanceRepo = new AmbulanceRepository(config);
             AddedAmbulances = new(ambulanceRepo.GetAll());
             CreateAmbulance = new(IsValidAmbulanceData, CreateNewAmbulance);
         }
@@ -52,13 +53,12 @@ namespace RegionSyd.ViewModel
 
         public void CreateNewAmbulance(object param)
         {
-            AmbulanceRepository repo = AmbulanceRepository.GetInstance();
 
             Ambulance ambulance = new Ambulance(AmbulanceName, AmbulanceHospital, AmbulanceStatus);
 
-            repo.Add(ambulance);
+            ambulanceRepo.Insert(ambulance);
 
-            AddedAmbulances = new(repo.GetAll());
+            AddedAmbulances = new(ambulanceRepo.GetAll());
             OnPropertyChanged(nameof(AddedAmbulances));
 
             MessageStore.Message = "Ambulance added successfully.";

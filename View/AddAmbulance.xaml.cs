@@ -29,6 +29,9 @@ namespace RegionSyd.View
         {
             string ambulanceID = WriteAmbulanceID.Text;
             string station = WriteStation.Text;
+            // TODO : station is of right now a string, needs to become combobox hospital thing
+            Hospital hospital = null;
+
             string status = WriteStatus.Text;
             
 
@@ -39,7 +42,7 @@ namespace RegionSyd.View
 
             else
             {
-                Ambulance ambulance = new Ambulance(ambulanceID, station, status)
+                Ambulance ambulance = new Ambulance(ambulanceID, hospital, status)
 
                 {
                     //ID = ambulanceID,

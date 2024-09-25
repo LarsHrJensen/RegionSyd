@@ -44,7 +44,9 @@ namespace RegionSyd.ViewModel
             Statuses.Add("Aktiv");
             Statuses.Add("Standby");
             Statuses.Add("Inaktiv");
-            _currentViewModel = new AddAmbulanceViewModel(Statuses);
+
+
+            //_currentViewModel = new AddAmbulanceViewModel(Statuses);
 
 
             // navigation command setup

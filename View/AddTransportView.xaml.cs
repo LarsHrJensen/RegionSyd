@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RegionSyd.Model.Helper;
+
 
 namespace RegionSyd.View
 {
@@ -23,6 +27,8 @@ namespace RegionSyd.View
         public AddTransportView()
         {
             InitializeComponent();
+
+            TimePicker.TextChanged += CheckTimePicker;
         }
 
         private void HospitalSelection(object sender, SelectionChangedEventArgs e)
@@ -42,5 +48,33 @@ namespace RegionSyd.View
 
             }
         }
+
+        private void CheckTimePicker(object sender, RoutedEventArgs e) 
+        {
+            bool isValid = RegionSyd.Model.Helper.Validation.ValidHourMinute(TimePicker.Text);
+            if (isValid)
+            {
+                TimePickerLabel.Foreground = Brushes.Green;
+                TimePickerLabel.FontStyle = FontStyles.Normal;
+
+                TimePicker.BorderBrush = null;
+
+                TimePicker.ToolTip = null;
+            }
+            else
+            {
+
+                ToolTip toolTip = new ToolTip();
+                toolTip.Content = "HH:MM   ( 12:15 , 23:59, etc... )";
+
+                TimePicker.ToolTip = toolTip;
+                
+
+                TimePickerLabel.Foreground = Brushes.Red;
+                TimePickerLabel.FontStyle = FontStyles.Italic;
+            }
+        }
+
+
     }
 }

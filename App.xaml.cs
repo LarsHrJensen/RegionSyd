@@ -5,7 +5,14 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 
+
 using RegionSyd.View;
+using RegionSyd.Model;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using System.ServiceProcess;
 
 namespace RegionSyd
 {
@@ -15,31 +22,24 @@ namespace RegionSyd
     public partial class App : Application
     {
 
+
         /**
          * The skibideal is, the gyatt was rizzed from the start.
          */
         void InitializeApp(object sender, EventArgs e)
         {
 
-            HospitalStore.Hospitals = new List<Hospital>();
+            // shittest of shitcode
+            // navigate from bin8.0/debug blablabla to root of project so we can access appconfig.json
+            string ProjectRootPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName;
+            string appsettingsFilePath = ProjectRootPath + "/appconfig.json";
 
-            // add hospitals for testing
-            HospitalStore.Hospitals.Add(new("Rigshospitalet", "Blegdamsvej 9", "København 2100", "Region Hovedstaden"));
-            HospitalStore.Hospitals.Add(new("Odense Universitetshospital", "J. B. Winsløws Vej 4", "Odense 5000", "Region Syddanmark"));
-            HospitalStore.Hospitals.Add(new("Aarhus Universitetshospital", "Palle Juul-Jensens Boulevard 99", " Aarhus N 8200", "Region Midtjylland"));
 
-            // add patients for testing
-            PatientRepository patientRepo = PatientRepository.GetInstance();
-            patientRepo.Add(new("0301001233", "Rasmus Kallehauge", "4"));
-            patientRepo.Add(new("1109016995", "Lars Jensen ", "2"));
-            patientRepo.Add(new("0404961944", "Mathilde Johnsen-Zaavi", "1"));
-
-            // add ambulances 
-            AmbulanceRepository ambulanceRepo = AmbulanceRepository.GetInstance();
+            IConfigurationRoot config = new ConfigurationBuilder().AddJsonFile(appsettingsFilePath).Build();
 
 
             // setup main window 
-            MainWindow mw = new();
+            MainWindow mw = new(config);
             mw.Show();
         }
     }

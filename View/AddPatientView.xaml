@@ -10,36 +10,33 @@
              >
     <Grid Margin="{StaticResource DefaultMargin}">
         <StackPanel Orientation="Horizontal">
-            
-        <Grid >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-            </Grid.ColumnDefinitions>
+             
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
-            </Grid.RowDefinitions>
-
-            
-            
-            <TextBox Grid.Column="1" Grid.Row="0" Height="{StaticResource TextboxHeight}" Text="{Binding PatientName, UpdateSourceTrigger=PropertyChanged}" Name="PatientNameTextBox"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                
+                <TextBox Grid.Column="1" Grid.Row="0" Height="{StaticResource TextboxHeight}" Text="{Binding PatientName, UpdateSourceTrigger=PropertyChanged}" Name="PatientNameTextBox"/>
                 <TextBox Grid.Column="1" Grid.Row="1"  Height="{StaticResource TextboxHeight}" Text="{Binding PatientCPR, UpdateSourceTrigger=PropertyChanged}" Name="PatientCPRTextBox"/>
                 <TextBox Grid.Column="1" Grid.Row="2"  Height="{StaticResource TextboxHeight}" Text="{Binding PatientActuality, UpdateSourceTrigger=PropertyChanged}" Name="PatientActualityTextBox"/>
             <!-- TODO : Patient actuality might become a combobox instead of a textbox -->
 
-            <Label Content="Patient name:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
-            <Label Content="Patient CPR:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
-            <Label Content="Patient Actuality:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                <Label Content="Patient name:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                <Label Content="Patient CPR:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                <Label Content="Patient Actuality:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
 
-            <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="3" Grid.Column="1" Content="Opret Patient" Command="{Binding CreatePatient}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="3" Grid.Column="1" Content="Opret Patient" Command="{Binding CreatePatient}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
-            
-        </Grid>
+            </Grid>
 
             <ListBox ItemsSource="{Binding AddedPatients}" Height="600" Width="300">
                 <ListBox.ItemTemplate>

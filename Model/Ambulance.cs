@@ -15,9 +15,9 @@ namespace RegionSyd.Model
         public string Status { get; }
         public List<Transport> Tasks {  get; }
 
-        public Ambulance(string name, string station, string status)
+        public Ambulance(string id, string station, string status)
         {
-            Name = name;
+            ID = id;
             Station = station; 
             Status = status;
             Tasks = new List<Transport>();

@@ -1,4 +1,5 @@
-﻿using RegionSyd.Model;
+﻿using Microsoft.Extensions.Configuration;
+using RegionSyd.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,11 @@ namespace RegionSyd.ViewModel
         private Patient _patient;
         public Patient Patient { get { return _patient; } }
 
-        public ChangePatientViewModel(Patient patient)
+        IConfiguration _configuration;
+
+        public ChangePatientViewModel(Patient patient, IConfiguration config)
         {
+            _configuration = config;
             _patient = patient;
         }
     }

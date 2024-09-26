@@ -1,11 +1,13 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
+using RegionSyd.Model.Store;
 
 
 namespace RegionSyd.Model.Repository.Repository
@@ -85,7 +87,34 @@ namespace RegionSyd.Model.Repository.Repository
 
         public void Update(Ambulance entity)
         {
-            throw new NotImplementedException();
+            string commandText = $"UPDATE {_tableName} SET [Name] = @Name, [Station] = @Station, [Status] = @Status WHERE [Id] = @Id";
+
+            using (SqlConnection connection = new(_connectionString))
+            {
+                
+
+                SqlCommand command = new SqlCommand(commandText, connection);
+                command.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar) { Value = entity.Name });
+                command.Parameters.Add(new SqlParameter("@Station", SqlDbType.Int) { Value = entity.Hospital.Id });
+                command.Parameters.Add(new SqlParameter("@Status", SqlDbType.VarChar) { Value = entity.Status });
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = entity.Id });
+
+                connection.Open();
+
+                int result = command.ExecuteNonQuery();
+                if (result == 0)
+                {
+                    throw new Exception("Could not update");
+                } else if (result == 1)
+                {
+                    MessageStore.Message = $"Succesfully updated {entity.Name}";
+                }
+                else
+                {
+                    throw new Exception("Wtf happend here");
+                }
+            }
+
         }
     }
 }

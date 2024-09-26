@@ -64,10 +64,6 @@ namespace RegionSyd.ViewModel
             MessageStore.Message = "Ambulance added successfully.";
             ResetFields();
 
-
-           
-
-
         }
         private void ResetFields()
         {

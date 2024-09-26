@@ -10,24 +10,63 @@ using RegionSyd.Model.Repository;
 using RegionSyd.Model.Repository.Repository;
 using RegionSyd.Model.Store;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics;
 
 namespace RegionSyd.ViewModel
 {
     public class AddAmbulanceViewModel : ViewModelBase 
     {
-     public string AmbulanceName { get; set; }
-     public string AmbulanceStatus { get; set; }
-     public Hospital AmbulanceHospital { get; set; }
-     public List<string> Statuses { get;}
 
-     public List<Ambulance> Ambulances { get; }
+        private string ambulanceName;
+        public string AmbulanceName { 
+            get
+            {
+                return ambulanceName;
+            }
+            set
+            {
+                ambulanceName = value;
+                CreateAmbulance.RaiseCanExecuteChanged();
+            }
+        }
 
+        private string ambulanceStatus;
+        public string AmbulanceStatus { 
+            get
+            {
+                return ambulanceStatus;
+            }
+            set
+            {
+                ambulanceStatus = value;
+                CreateAmbulance.RaiseCanExecuteChanged();
+            }
+        }
 
-        public RelayCommand CreateAmbulance { get; set; }
+        private Hospital ambulanceHospital;
+        public Hospital AmbulanceHospital {
+            get
+            {
+                return ambulanceHospital;
+            }
+            set
+            {
+                ambulanceHospital = value;
+                CreateAmbulance.RaiseCanExecuteChanged();
+            }
+        }
+
+        public List<string> Statuses { get;}
+
+        public List<Ambulance> Ambulances { get; }
+        public ObservableCollection<Hospital> Hospitals { get; }
+
+        public RelayCommand CreateAmbulance { get; }
         public ObservableCollection<Ambulance> AddedAmbulances { get; set; }
         AmbulanceRepository ambulanceRepo;
 
         IConfiguration _configuration;
+
 
 
         public AddAmbulanceViewModel(IConfiguration config,  List<string> statuses)
@@ -36,17 +75,28 @@ namespace RegionSyd.ViewModel
             Statuses = statuses;
             ambulanceRepo = new AmbulanceRepository(config);
             AddedAmbulances = new(ambulanceRepo.GetAll());
+
+            HospitalRepository hospitalRepo = new HospitalRepository(config);
+
+
+            Hospitals = new ObservableCollection<Hospital>(hospitalRepo.GetAll());
+
             CreateAmbulance = new(IsValidAmbulanceData, CreateNewAmbulance);
         }
 
         public bool IsValidAmbulanceData(object param)
         {
+
+
+            Debug.WriteLine(AmbulanceName);
             if (String.IsNullOrEmpty(AmbulanceName)) { return false; }
+            Debug.WriteLine(AmbulanceStatus);
             if (String.IsNullOrEmpty(AmbulanceStatus)) { return false; }
+            Debug.WriteLine(ambulanceHospital.Name);
             if (AmbulanceHospital == null) { return false; }
 
             // TODO : perhaps regex for cpr 
-
+            Debug.WriteLine("test");
 
             return true;
         }

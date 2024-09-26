@@ -69,7 +69,7 @@ namespace RegionSyd.ViewModel
 
         //Initialiserer et VM, som håndterer ambulancedata. Opretter forbindelse til Repo-> henter eksisterende ambulancer -> konfigurer kommandoer til at validere ->opretter ny ambulance 
 
-        public void AddAmbulanceViewModel(IConfiguration config) 
+        public ChangeAmbulanceViewModel(IConfiguration config, Ambulance ambulance) 
         {
             _configuration = config;
             ambulanceRepo = new AmbulanceRepository(config);

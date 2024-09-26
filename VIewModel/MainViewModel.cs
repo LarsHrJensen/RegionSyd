@@ -76,7 +76,7 @@ namespace RegionSyd.ViewModel
         
         public void NavChangeAmbulance(Ambulance amb)
         {
-            CurrentViewModel = new ChangeAmbulanceViewModel(amb);
+            CurrentViewModel = new ChangeAmbulanceViewModel(_config, amb);
         }
 
         public void NavChangePatient(Patient patient)

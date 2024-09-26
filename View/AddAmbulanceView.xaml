@@ -23,6 +23,8 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+
 
                 </Grid.RowDefinitions>
 
@@ -30,6 +32,17 @@
                 </TextBox>
 
                 <ComboBox Grid.Row="1"  Grid.Column="1" Name="FromStation" ItemsSource="{Binding Hospitals}" SelectionChanged="FromStation_SelectionChanged" Height="50" VerticalAlignment="Top">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Ambulance Name, Mode=OneTime}"/>
+                                <TextBlock Text="{Binding Hospital, Mode=OneTime}"/>
+                                <TextBlock Text="{Binding Status, Mode=OneTime}"/>
+                            </StackPanel>
+                            
+                        </DataTemplate>
+                        
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
                 <ComboBox Grid.Row="2"  Grid.Column="1" Name="Status" ItemsSource="{Binding Statuses}">
                 </ComboBox>
@@ -39,6 +52,7 @@
                 <Label Content="Status:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
 
                 <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="4" Grid.Column="1" Content="Tilføj ambulance" Command="{Binding SaveChanges}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="5" Grid.Column="1" Content="Slet ambulance" Command="{Binding SaveChanges}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 
             </Grid>
@@ -50,7 +64,7 @@
                         <GridViewColumn Header="Ambulancetilføjelse" Width="300" DisplayMemberBinding="{Binding}" />
 
                     </GridView>
-                    
+
                 </ListView.View>
             </ListView>
         </StackPanel>

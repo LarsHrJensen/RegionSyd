@@ -29,7 +29,7 @@
                 <TextBox Grid.Row="0"  Grid.Column="1" Name="Ambulancenavn" >
                 </TextBox>
 
-                <ComboBox Grid.Row="1"  Grid.Column="1" Name="FromStation" ItemsSource="{Binding Hospitals}" SelectionChanged="FromStation_SelectionChanged">
+                <ComboBox Grid.Row="1"  Grid.Column="1" Name="FromStation" ItemsSource="{Binding Hospitals}" SelectionChanged="FromStation_SelectionChanged" Height="50" VerticalAlignment="Top">
                 </ComboBox>
                 <ComboBox Grid.Row="2"  Grid.Column="1" Name="Status" ItemsSource="{Binding Statuses}">
                 </ComboBox>

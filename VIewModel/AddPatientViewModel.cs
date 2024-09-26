@@ -60,7 +60,7 @@ namespace RegionSyd.ViewModel
 
         public ObservableCollection<Patient> AddedPatients { get; set; }
         PatientRepository patientRepo;
-        IConfiguration _configuration;
+        
 
 
         public AddPatientViewModel(IConfiguration config)

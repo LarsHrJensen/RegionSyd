@@ -31,6 +31,11 @@
                         <localviews:AddTransportView/>
                     </DataTemplate>
 
+
+                    <DataTemplate DataType="{x:Type localviewmodels:AddAmbulanceViewModel}">
+                        <localviews:AddAmbulanceView/>
+                    </DataTemplate>
+
                     <DataTemplate DataType="{x:Type localviewmodels:OverviewViewModel}">
                         <localviews:OverviewView/>
                     </DataTemplate>
@@ -38,9 +43,13 @@
                     <DataTemplate DataType="{x:Type localviewmodels:ChangeTransportViewModel}">
                         <localviews:ChangeTransportView/>
                     </DataTemplate>
-                    
-                    <DataTemplate DataType="{x:Type localviewmodels:AddAmbulanceViewModel}">
-                        <localviews:AddAmbulanceView/>
+
+                    <DataTemplate DataType="{x:Type localviewmodels:ChangePatientViewModel}">
+                        <localviews:ChangePatientView/>
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type localviewmodels:ChangeAmbulanceViewModel}">
+                        <localviews:ChangeAmbulanceView/>
                     </DataTemplate>
 
                 </ContentControl.Resources>

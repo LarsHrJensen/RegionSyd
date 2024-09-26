@@ -49,12 +49,12 @@ namespace RegionSyd.ViewModel
             set { travelTime = value; }
         }
 
-        private DateTime arrival;
+        private DateTime arrivalDate;
 
-        public DateTime Arrival
+        public DateTime ArrivalDate
         {
-            get { return arrival; }
-            set { arrival = value; }
+            get { return arrivalDate; }
+            set { arrivalDate = value; }
         }
 
         public RelayCommand SaveChanges { get; }
@@ -74,12 +74,16 @@ namespace RegionSyd.ViewModel
 
         public bool CanSave(object param)
         {
+            if (FromHospital == null) return false; 
+            if (ToHospital == null) return false;
+            if (ArrivalDate == null) return false;
+
             return true;
         }
 
         public void Save(object param)
         {
-
+            
         }
 
 

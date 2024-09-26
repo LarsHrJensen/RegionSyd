@@ -61,7 +61,7 @@ namespace RegionSyd.ViewModel
         // Could be rewrote into lambda instead of this, would be prettier code, but less readable
         private void navCreatePatient()
         {
-            CurrentViewModel = new AddPatientViewModel();
+            CurrentViewModel = new AddPatientViewModel(_config);
         }
         private void navCreateTransport()
         {

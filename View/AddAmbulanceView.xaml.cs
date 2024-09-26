@@ -24,5 +24,10 @@ namespace RegionSyd.View
         {
             InitializeComponent();
         }
+
+        private void FromStation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -81,7 +81,7 @@ namespace RegionSyd.ViewModel
 
         public void NavChangePatient(Patient patient)
         {
-            CurrentViewModel = new ChangePatientViewModel(patient);
+            CurrentViewModel = new ChangePatientViewModel(patient, _config);
         }
 
         public void NavChangePatient(Transport transport)

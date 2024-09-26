@@ -7,8 +7,8 @@
     "**/obj",
     "**/platforms"
   ],
-  "ConnectionStrings": {
-    "WinAuth": "",
-    "SQLAuth": "Server=localhost;Database=RegionSyd;Trusted_Connection=True;User ID=admin;Password=adminpassword;TrustServerCertificate=True;"
-  }
+    "ConnectionStrings": {
+        "WinAuth": "",
+        "SQLAuth": "Server=localhost;Database=RegionSyd;Trusted_Connection=True;User ID=admin;Password=adminpass;TrustServerCertificate=True;"
+    }
 }

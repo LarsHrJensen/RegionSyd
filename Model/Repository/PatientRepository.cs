@@ -1,7 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using RegionSyd.Model.Store;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,7 +69,26 @@ namespace RegionSyd.Model.Repository
 
         public void Insert(Patient entity)
         {
-            throw new NotImplementedException();
+            string commandText = $"INSERT INTO {_tableName}([Name], [Status]) VALUES (@Name, @Status)";
+
+            using (SqlConnection conn = new(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(commandText, conn);
+                command.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar) { Value = entity.FullName });
+                command.Parameters.Add(new SqlParameter("@Status", SqlDbType.VarChar) { Value = entity.Status });
+
+                conn.Open();
+                int reuslt = command.ExecuteNonQuery();
+                if (reuslt == 0)
+                {
+                    throw new Exception("Damn");
+                }
+                else
+                {
+                    MessageStore.Message = "Successfully added patient.";
+                }
+            }
+
         }
 
         public void Update(Patient entity)

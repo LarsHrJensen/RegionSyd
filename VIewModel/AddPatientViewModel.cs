@@ -84,13 +84,13 @@ namespace RegionSyd.ViewModel
 
         public void CreateNewPatient(object param)
         {
-            //PatientRepository repo = PatientRepository.GetInstance();
+            PatientRepository repo = new PatientRepository(_configuration);
 
             Patient patient = new Patient(PatientCPR, PatientName, PatientActuality);
 
-            //repo.Add(patient);
+            repo.Insert(patient);
 
-            //AddedPatients = new(repo.GetAll());
+            AddedPatients = new(repo.GetAll());
             OnPropertyChanged(nameof(AddedPatients));
 
             MessageStore.Message = "Patient added successfully.";

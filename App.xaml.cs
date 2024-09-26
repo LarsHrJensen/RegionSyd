@@ -10,7 +10,6 @@ using RegionSyd.View;
 using RegionSyd.Model;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.ServiceProcess;
 

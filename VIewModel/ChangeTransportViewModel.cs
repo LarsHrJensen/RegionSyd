@@ -9,19 +9,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Windows;
+using RegionSyd.Model.Command;
 
 
 namespace RegionSyd.ViewModel
 {
     public class ChangeTransportViewModel : ViewModelBase 
     {
-         public Transport CurrentTransport { get;  set; }
-         public Hospital FromHospital { get; set; }
-         public Hospital ToHospital { get; set; }
-         public int TravelTime {  get; set; }
-         public DateTime Arrival { get; set; }
-    
-         public ObservableCollection<Hospital> Hospitals { get;}
+        private Transport currentTransport;
+
+        public Transport CurrentTransport
+        {
+            get { return currentTransport; }
+            set { currentTransport = value; }
+        }
+
+        private Hospital toHospital;
+
+        public Hospital ToHospital
+        {
+            get { return toHospital; }
+            set { toHospital = value; }
+        }
+
+        private Hospital fromHospital;
+
+        public Hospital FromHospital
+        {
+            get { return fromHospital; }
+            set { fromHospital = value; }
+        }
+
+        private int travelTime;
+
+        public int TravelTime
+        {
+            get { return travelTime; }
+            set { travelTime = value; }
+        }
+
+        private DateTime arrival;
+
+        public DateTime Arrival
+        {
+            get { return arrival; }
+            set { arrival = value; }
+        }
+
+        public RelayCommand SaveChanges { get; }
+
+
+        public ObservableCollection<Hospital> Hospitals { get;}
      
         public ChangeTransportViewModel(IConfiguration config) 
         {
@@ -29,7 +68,20 @@ namespace RegionSyd.ViewModel
 
 
             Hospitals = new ObservableCollection<Hospital>(repo.GetAll());
+
+            SaveChanges = new RelayCommand(CanSave, Save);
         }
+
+        public bool CanSave(object param)
+        {
+            return true;
+        }
+
+        public void Save(object param)
+        {
+
+        }
+
 
     }
     

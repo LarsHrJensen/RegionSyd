@@ -93,7 +93,30 @@ namespace RegionSyd.Model.Repository
 
         public void Update(Patient entity)
         {
-            throw new NotImplementedException();
+            string commandText = $"UPDATE {_tableName} SET [Name] = @Name, [Status] = @Status WHERE [Id] = @Id";
+            using (SqlConnection connection = new(_connectionString)) 
+            {
+                SqlCommand command = new SqlCommand(commandText, connection);
+                command.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar) { Value = entity.FullName });
+                command.Parameters.Add(new SqlParameter("@Status", SqlDbType.VarChar) { Value = entity.Status });
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = entity.Id });
+
+                connection.Open();
+
+                int result = command.ExecuteNonQuery();
+                if (result == 0)
+                {
+                    throw new Exception("Could not update");
+                } else if (result == 1)
+                {
+                    MessageStore.Message = $"Sucessfully updated {entity.FullName}";
+                }
+                else
+                {
+                    throw new Exception("Unreachable code reached");
+                }
+            }
+
         }
     }
 }

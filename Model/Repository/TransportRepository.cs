@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Data;
+using System.Reflection.Metadata;
+using RegionSyd.Model.Store;
 
 namespace RegionSyd.Model.Repository
 {
@@ -115,19 +117,19 @@ namespace RegionSyd.Model.Repository
         public void Insert(Transport entity)
         {
             string commandText = $"INSERT INTO {_tableName}([From], [To], [Patient], [Arrival]) VALUES (@From, @To, @Patient, @Arrival)";
-            using (_connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                SqlCommand command = new SqlCommand(commandText, _connection);
-                                      
+                SqlCommand command = new SqlCommand(commandText, connection);
+
                 command.Parameters.Add(new SqlParameter("@From", SqlDbType.Int) { Value = entity.StartHospital.Id });
                 command.Parameters.Add(new SqlParameter("@To", SqlDbType.Int) { Value = entity.DestinationHospital.Id });
                 command.Parameters.Add(new SqlParameter("@Patient", SqlDbType.Int) { Value = entity.Patient.Id });
                 command.Parameters.Add(new SqlParameter("@Arrival", SqlDbType.SmallDateTime) { Value = entity.ArrivalTime });
 
-                _connection.Open();
+                connection.Open();
 
                 Debug.WriteLine(entity.Patient);
-                
+
                 int result = command.ExecuteNonQuery();
                 if (result == 0)
                 {
@@ -138,12 +140,36 @@ namespace RegionSyd.Model.Repository
                     Store.MessageStore.Message = "Success! Transport added.";
                 }
             }
-
         }
 
         public void Update(Transport entity)
         {
-            throw new NotImplementedException();
+            string commandText = $"UPDATE {_tableName} SET [From] = @From, [To] = @To, [Patient] = @Patient WHERE [Id] = @Id";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(commandText, connection);
+
+                command.Parameters.Add(new SqlParameter("@From", SqlDbType.Int) { Value = entity.StartHospital.Id });
+                command.Parameters.Add(new SqlParameter("@To", SqlDbType.Int) { Value = entity.DestinationHospital.Id });
+                command.Parameters.Add(new SqlParameter("@Patient", SqlDbType.Int) { Value = entity.Patient.Id });
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = entity.Id });
+
+                connection.Open();
+
+                int result = command.ExecuteNonQuery();
+                
+                if(result == 0)
+                {
+                    throw new Exception("Could not update");
+                } else if (result == 1)
+                {
+                    MessageStore.Message = $"Successfully updated {entity.StartHospital.Name} -> {entity.DestinationHospital.Name}";
+                }
+                else
+                {
+                    throw new Exception("How did we get here?");
+                }
+            }
         }
     }
 }

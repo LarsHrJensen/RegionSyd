@@ -1,11 +1,13 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using RegionSyd.Model.Store;
 
 namespace RegionSyd.Model.Repository
 {
@@ -68,13 +70,13 @@ namespace RegionSyd.Model.Repository
 
             string cmdText = $"SELECT * FROM {_tableName} WHERE Id = @Id";
 
-            using (_connection = new(_connectionString))
+            using (SqlConnection connection = new(_connectionString))
             {
-                SqlCommand command = new(cmdText, _connection);
+                SqlCommand command = new(cmdText, connection);
                 
                 command.Parameters.AddWithValue("@Id", id);
 
-                _connection.Open();
+                connection.Open();
                 using (SqlDataReader reader = command.ExecuteReader()) 
                 {
                     // If no Hospital exists with given id
@@ -97,7 +99,33 @@ namespace RegionSyd.Model.Repository
 
         public void Update(Hospital entity)
         {
-            throw new NotImplementedException();
+            string commandText = $"UPDATE {_tableName} SET [Name] = @Name, [Address] = @Address, [Region] = @Region, [City] = @City WHERE [Id] = @Id";
+            using (SqlConnection connection = new(_connectionString))
+            {
+                
+                SqlCommand command = new SqlCommand(commandText, connection);
+                command.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar) { Value = entity.Name});
+                command.Parameters.Add(new SqlParameter("@Address", SqlDbType.VarChar) { Value = entity.Address});
+                command.Parameters.Add(new SqlParameter("@Region", SqlDbType.VarChar) { Value = entity.Region});
+                command.Parameters.Add(new SqlParameter("@City", SqlDbType.VarChar) { Value = entity.City});
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = entity.Id });
+
+                connection.Open();
+
+                int result = command.ExecuteNonQuery();
+                if(result == 0)
+                {
+                    throw new Exception("Could not update");
+                } if(result == 1)
+                {
+                    MessageStore.Message = $"Successfully updated {entity.Name}";
+                }
+                else
+                {
+                    throw new Exception("How did we get here?");
+                }
+
+            }
         }
     }
 }

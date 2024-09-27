@@ -21,5 +21,15 @@ namespace RegionSyd.Model
             if (id > 0) Id = id;
         }
 
+        public bool IsValid()
+        {
+            if (string.IsNullOrEmpty(CPR)) return false;
+            if (string.IsNullOrEmpty(FullName)) return false;
+            if (string.IsNullOrEmpty(Status)) return false;
+
+            if ( CPR.Length != 10) return false;
+
+            return true;
+        }
     }
 }

@@ -36,6 +36,11 @@ namespace RegionSyd.ViewModel
             Hospitals = new ObservableCollection<Hospital>(repo.GetAll());
         }
 
+        public bool CanSaveTransportData()
+        {
+            return CurrentTransport.IsValid();
+        }
+
     }
     
 

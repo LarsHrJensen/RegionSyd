@@ -24,5 +24,6 @@ namespace RegionSyd.View
         {
             InitializeComponent();
         }
+
     }
 }

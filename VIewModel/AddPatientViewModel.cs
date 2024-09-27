@@ -69,6 +69,8 @@ namespace RegionSyd.ViewModel
 
         public bool IsValidPatientData(object param)
         {
+
+            // Todo : replace with new isValid methods
             if (String.IsNullOrEmpty(PatientName)) { return false; }
             if (String.IsNullOrEmpty(PatientCPR)) { return false; }
             if (String.IsNullOrEmpty(PatientActuality)) { return false; }

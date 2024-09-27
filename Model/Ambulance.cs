@@ -10,10 +10,10 @@ namespace RegionSyd.Model
     public class Ambulance
     {
         public int Id { get; private set; }
-        public string Name { get; }
-        public Hospital Hospital {  get; }
-        public string Status { get; }
-        public List<Transport> Tasks {  get; }
+        public string Name { get; set; }
+        public Hospital Hospital { get; set; }
+        public string Status { get; set; }
+        public List<Transport> Tasks { get; set; }
 
 
 
@@ -54,6 +54,17 @@ namespace RegionSyd.Model
         public List<Transport> GetTasks()
         {
             return Tasks;
+        }
+
+
+        public bool IsValid()
+        {
+            if (String.IsNullOrEmpty(Name)) return false;
+            if (string.IsNullOrEmpty(Status)) return false;
+
+            if (Hospital == null) return false;
+
+            return true;
         }
     } 
 }

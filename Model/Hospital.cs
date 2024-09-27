@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Media.Converters;
 
 public class Hospital
 {
@@ -23,5 +24,14 @@ public class Hospital
         Id = id;
     }
 
+    public bool IsValid()
+    {
+        if (string.IsNullOrEmpty(Name)) return false;
+        if (string.IsNullOrEmpty(Address)) return false;
+        if (string.IsNullOrEmpty(City)) return false;
+        if (string.IsNullOrEmpty(Region)) return false;
+
+        return true;
+    }
 
 }

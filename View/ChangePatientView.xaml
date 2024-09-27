@@ -6,40 +6,40 @@
              xmlns:local="clr-namespace:RegionSyd.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="White"
+             Background="White" 
              >
     <Grid Margin="{StaticResource DefaultMargin}">
         <StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="Currently editing patient :" FontSize="20" />
-                <TextBlock Name="PatientName" FontSize="20" Text="{Binding Patient.FullName}"/>
+                <TextBlock Text="Currently editing patient : " FontSize="20" />
+                <TextBlock Name="PatientName" FontSize="20" Text="{Binding PatientName, Mode=OneTime}"/>
             </StackPanel>
             
 
-            <Grid>
+            <Grid Margin="{StaticResource SmallMargin}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
                 <TextBox Grid.Column="1" Grid.Row="0" Height="{StaticResource TextboxHeight}" Text="{Binding PatientName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Name="PatientNameTextBox"/>
                 <TextBox Grid.Column="1" Grid.Row="1"  Height="{StaticResource TextboxHeight}" Text="{Binding PatientCPR, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Name="PatientCPRTextBox"/>
-                <TextBox Grid.Column="1" Grid.Row="2"  Height="{StaticResource TextboxHeight}" Text="{Binding PatientActuality, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Name="PatientActualityTextBox"/>
+                <TextBox Grid.Column="1" Grid.Row="2"  Height="{StaticResource TextboxHeight}" Text="{Binding PatientStatus, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Name="PatientActualityTextBox"/>
                 <!-- TODO : Patient actuality might become a combobox instead of a textbox -->
 
                 <Label Content="Patient name:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Patient CPR:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Patient Actuality:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
 
-                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="3" Grid.Column="1" Content="Opret Patient" Command="{Binding CreatePatient}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="3" Grid.Column="1" Content="Gem ændringer" Command="{Binding ChangePatient}" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
             </Grid>
         </StackPanel>

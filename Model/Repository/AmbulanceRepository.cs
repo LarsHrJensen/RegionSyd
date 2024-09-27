@@ -23,9 +23,11 @@ namespace RegionSyd.Model.Repository.Repository
         // I f*ing hate dependency injection, give me lethal injection instead
         public AmbulanceRepository(IConfiguration config, string ambulanceTableName="Ambulances")
         {
+
             _connectionString = config.GetConnectionString("SQLAuth");
             _tableName = ambulanceTableName;
             _configuration = config;
+
         }
 
         public void Delete(Ambulance entity)

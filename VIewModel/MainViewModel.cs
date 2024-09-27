@@ -71,9 +71,12 @@ namespace RegionSyd.ViewModel
         {
             CurrentViewModel = new OverviewViewModel(this, _config);
         }
+        private void navCreateAmbulance()
+        {
+            CurrentViewModel = new AddAmbulanceViewModel(_config, Statuses);
+        }
 
 
-        
         public void NavChangeAmbulance(Ambulance amb)
         {
             CurrentViewModel = new ChangeAmbulanceViewModel(_config, amb);
@@ -94,10 +97,7 @@ namespace RegionSyd.ViewModel
 
         }
 
-        private void navCreateAmbulance()
-        {
-            CurrentViewModel = new AddAmbulanceViewModel(_config, Statuses);
-        }
+   
 
         /* 
          * Additional navigation methods go here!

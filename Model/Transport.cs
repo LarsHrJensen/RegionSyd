@@ -25,5 +25,16 @@ namespace RegionSyd.Model
             Patient = patient;
             Id = id;
         }
+
+        public bool IsValid()
+        {
+            if (StartHospital == null) return false;
+            if (DestinationHospital == null) return false;
+            if (Patient == null) return false;
+            // apparently useless, we leave it here anyway
+            if (ArrivalTime == null) return false;
+
+            return true;
+        }
     }
 }

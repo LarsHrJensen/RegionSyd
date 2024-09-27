@@ -93,7 +93,6 @@ namespace RegionSyd.ViewModel
             AddedPatients = new(repo.GetAll());
             OnPropertyChanged(nameof(AddedPatients));
 
-            MessageStore.Message = "Patient added successfully.";
             ResetFields();
         }
 

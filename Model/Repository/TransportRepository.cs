@@ -113,7 +113,7 @@ namespace RegionSyd.Model.Repository
         {
             throw new NotImplementedException();
         }
-
+        
         public void Insert(Transport entity)
         {
             string commandText = $"INSERT INTO {_tableName}([From], [To], [Patient], [Arrival]) VALUES (@From, @To, @Patient, @Arrival)";

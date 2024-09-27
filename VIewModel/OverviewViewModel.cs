@@ -51,19 +51,19 @@ namespace RegionSyd.ViewModel
         public void NavigateChangeAmbulance(Ambulance selectedAmbulance)
         {
             if(selectedAmbulance == null) return;
-            Debug.WriteLine(selectedAmbulance.Name);
+            mainViewmodel.NavChangeAmbulance(selectedAmbulance);
         }
 
         public void NavigateChangeTransport(Transport selectedTransport)
         {
             if(selectedTransport == null) return;
-            Debug.WriteLine(selectedTransport.DestinationHospital.City);
+            mainViewmodel.NavChangeTransport(selectedTransport);
         }
 
         public void NavigateChangePatient(Patient selectedPatient)
         {
             if(selectedPatient == null) return;
-            Debug.WriteLine(selectedPatient.FullName);
+            mainViewmodel.NavChangePatient(selectedPatient);
         }
 
     }

@@ -33,10 +33,6 @@ namespace RegionSyd.View
 
             // TODO : Rewrite into generic
 
-            ListView Skibidi = new();
-
-
-
             HospitalListOverview.SelectionChanged += (obj, e) =>
             {
                 ListView lv = (ListView)obj;

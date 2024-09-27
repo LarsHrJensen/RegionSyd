@@ -16,7 +16,7 @@ namespace RegionSyd.ViewModel
 
         IConfiguration _configuration;
 
-        public ChangePatientViewModel(Patient patient, IConfiguration config)
+        public ChangePatientViewModel(IConfiguration config, Patient patient)
         {
             _configuration = config;
             _patient = patient;

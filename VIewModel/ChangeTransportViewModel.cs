@@ -23,9 +23,14 @@ namespace RegionSyd.ViewModel
     
          public ObservableCollection<Hospital> Hospitals { get;}
      
-        public ChangeTransportViewModel(IConfiguration config) 
+        public ChangeTransportViewModel(IConfiguration config, Transport transport) 
         {
             HospitalRepository repo = new HospitalRepository(config);
+            CurrentTransport = transport;
+            FromHospital = CurrentTransport.StartHospital;
+            ToHospital = CurrentTransport.DestinationHospital;
+            // TODO : Insert datetime as text instead of datepicker
+            Arrival = CurrentTransport.ArrivalTime;
 
 
             Hospitals = new ObservableCollection<Hospital>(repo.GetAll());

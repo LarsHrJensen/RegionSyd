@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using RegionSyd.Model;
 using RegionSyd.Model.Repository;
-using RegionSyd.Model.Message;
 using System.Diagnostics;
 using RegionSyd.Model.Store;
 using Microsoft.Extensions.Configuration;

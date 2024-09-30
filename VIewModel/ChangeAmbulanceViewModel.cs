@@ -1,6 +1,11 @@
-﻿using RegionSyd.Model;
+﻿using Microsoft.Extensions.Configuration;
+using RegionSyd.Model;
+using RegionSyd.Model.Command;
+using RegionSyd.Model.Repository.Repository;
+using RegionSyd.Model.Store;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,6 +115,15 @@ namespace RegionSyd.ViewModel
         public void DeleteAmbulanceData()
         {
 
+            _ambulanceFromHospital = null;
+            _ambulanceId = null;
+            _ambulanceStatus = null;
         }
+
+
     }
+
+
+
+    
 }

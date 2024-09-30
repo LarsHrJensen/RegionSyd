@@ -17,6 +17,7 @@ namespace RegionSyd.Model.Repository.Repository
         SqlConnection _connection;
         string _connectionString;
         string _tableName;
+        IConfiguration _configuration;
 
         IConfiguration _configuration;
 

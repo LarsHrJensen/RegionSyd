@@ -10,11 +10,15 @@ using System.Windows.Controls;
 using RegionSyd.ViewModel;
 using Microsoft.Extensions.Configuration;
 
+
 namespace RegionSyd.VIewModel
 {
     public class ShowHospitalViewModel : ViewModelBase
     {
         public ObservableCollection<Transport> TransportList { get; set; }
+
+        public ShowHospitalViewModel(IConfiguration config)
+        IConfiguration _configuration;
 
         public ShowHospitalViewModel(IConfiguration config)
         {

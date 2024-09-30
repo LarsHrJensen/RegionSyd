@@ -32,7 +32,7 @@
 
                 <Label Content="Patient name:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Patient CPR:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                <Label Content="Patient Actuality:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                <Label Content="Patient notes:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
 
                 <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="3" Grid.Column="1" Content="Opret Patient" Command="{Binding CreatePatient}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 

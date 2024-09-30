@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace RegionSyd.View
 {
     /// <summary>
-    /// Interaction logic for ShowHospital.xaml
+    /// Interaction logic for ShowAmbulance.xaml
     /// </summary>
-    public partial class ShowHospital : UserControl
+    public partial class ShowAmbulanceView : UserControl
     {
-        public ShowHospital()
+        public ShowAmbulanceView()
         {
             InitializeComponent();
         }

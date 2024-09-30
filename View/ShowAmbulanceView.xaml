@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="RegionSyd.View.ShowAmbulanceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RegionSyd.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White"
+             >
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+
+                <ComboBox Grid.Column="0" Grid.Row="0" Height="{StaticResource TextboxHeight}" Name="HospitalNameTextBox" IsDropDownOpen="True" Text="Vælg Hospital" IsEditable="False" IsReadOnly="True" ItemsSource="{Binding HospitalList}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                 <Label Content="Ambulance:" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" />
+
+
+                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="1" Grid.Column="0" Content="Bekræft" Command="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="2" Grid.Column="0" Content="Ændr" Command="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="3" Grid.Column="0" Content="Slet" Command="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                
+
+
+                <!-- <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="3" Grid.Column="0" Content="Bekræft" Command="{Binding ConfirmCommand}" HorizontalAlignment="Center" VerticalAlignment="Top"/> -->
+            </Grid>
+
+
+            <ListView Margin="20" Width="500" Height="300" Name="HospitalListView" ItemsSource="{Binding TransportList}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Ambulancekørsel" Width="100" DisplayMemberBinding="{Binding StartHospital.Name}" />
+                        <GridViewColumn Header="Patientnavn" Width="100" DisplayMemberBinding="{Binding Patient.Name}" />
+                        <GridViewColumn Header="Fra Hospital" Width="100" DisplayMemberBinding="{Binding FromHospital}" />
+                        <GridViewColumn Header="Til Hospital" Width="100" DisplayMemberBinding="{Binding ToHospital}"/>
+                        <GridViewColumn Header="Afgang" Width="100" DisplayMemberBinding="{Binding DepartureTime, StringFormat='{}{0:HH:mm}'}" />
+                        <GridViewColumn Header="Ankomst" Width="100" DisplayMemberBinding="{Binding ArrivalTime, StringFormat='{}{0:HH:mm}'}" />
+                           
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </StackPanel>
+    </Grid>
+
+
+
+
+</UserControl>

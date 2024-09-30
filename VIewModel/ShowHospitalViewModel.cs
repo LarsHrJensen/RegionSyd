@@ -17,7 +17,7 @@ namespace RegionSyd.VIewModel
     {
         public ObservableCollection<Transport> TransportList { get; set; }
 
-        public ShowHospitalViewModel(IConfiguration config)
+
         IConfiguration _configuration;
 
         public ShowHospitalViewModel(IConfiguration config)

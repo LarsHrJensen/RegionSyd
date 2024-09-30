@@ -19,8 +19,6 @@ namespace RegionSyd.Model.Repository.Repository
         string _tableName;
         IConfiguration _configuration;
 
-        IConfiguration _configuration;
-
         // I f*ing hate dependency injection, give me lethal injection instead
         public AmbulanceRepository(IConfiguration config, string ambulanceTableName="Ambulances")
         {

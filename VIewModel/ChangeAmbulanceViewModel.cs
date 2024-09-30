@@ -115,9 +115,6 @@ namespace RegionSyd.ViewModel
         public void DeleteAmbulanceData()
         {
 
-            _ambulanceFromHospital = null;
-            _ambulanceId = null;
-            _ambulanceStatus = null;
         }
 
 

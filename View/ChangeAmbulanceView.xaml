@@ -25,9 +25,9 @@
 
                 <TextBox Grid.Row="0"  Grid.Column="1" Name="Ambulancenavn" Text="{Binding AmbulanceName}" >
                 </TextBox>
-                <TextBox Grid.Row="1" Grid.Column="1" Height="50" VerticalAlignment="Top">
+                <TextBox Grid.Row="1" Grid.Column="1" Height="50" VerticalAlignment="Top"/>
 
-                <ComboBox Grid.Row="1"  Grid.Column="1" Name="FromStation" ItemsSource="{Binding Hospitals}" SelectedItem="{Binding AmbulanceHospital, Mode=TwoWay}">
+        <ComboBox Grid.Row="1"  Grid.Column="1" Name="FromStation" ItemsSource="{Binding Hospitals}" SelectedItem="{Binding AmbulanceHospital, Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -36,12 +36,13 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <ComboBox Grid.Row="2"  Grid.Column="1" Name="Status" ItemsSource="{Binding Statuses}" SelectedItem="{Binding AmbulanceStatus}">
-                </ComboBox>
-                <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Statuses}">
-                </ComboBox>
 
-                <Label Content="Ambulancenummer:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
+            <ComboBox Grid.Row="2" Grid.Column="1" Name="Status" ItemsSource="{Binding Statuses}" SelectedItem="{Binding AmbulanceStatus}" />
+
+            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Statuses}" />
+
+
+            <Label Content="Ambulancenummer:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Hospital:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Status:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
             

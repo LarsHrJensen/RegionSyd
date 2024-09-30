@@ -16,11 +16,6 @@ namespace RegionSyd.ViewModel
 {
     public class AddAmbulanceViewModel : ViewModelBase 
     {
-     public string AmbulanceName { get; set; }
-     public string AmbulanceStatus { get; set; }
-     public Hospital AmbulanceHospital { get; set; }
-     public List<string> Statuses { get;}
-
         private string ambulanceName;
         public string AmbulanceName { 
             get
@@ -78,18 +73,12 @@ namespace RegionSyd.ViewModel
             _configuration = config;
             Statuses = StatusStore.Statuses;
             ambulanceRepo = new AmbulanceRepository(config);
-            AddedAmbulances = new(ambulanceRepo.GetAll());
-
             HospitalRepository hospitalRepo = new HospitalRepository(config);
 
 
+            AddedAmbulances = new(ambulanceRepo.GetAll());
             Hospitals = new ObservableCollection<Hospital>(hospitalRepo.GetAll());
-
             CreateAmbulance = new(IsValidAmbulanceData, CreateNewAmbulance);
-            _configuration = config;
-            Statuses = statuses;
-            ambulanceRepo = new AmbulanceRepository(config);
-            hospitalRepo = new HospitalRepository(config);
             Hospitals = new ObservableCollection<Hospital>(hospitalRepo.GetAll());
         }
 

@@ -55,7 +55,6 @@ namespace RegionSyd.ViewModel
 
         public RelayCommand CreatePatient {  get; set; }
 
-        IConfiguration _configuration;
 
         public ObservableCollection<Patient> AddedPatients { get; set; }
         PatientRepository patientRepo;

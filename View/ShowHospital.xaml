@@ -27,7 +27,7 @@
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
 
-                <ComboBox Grid.Column="0" Grid.Row="0" Height="{StaticResource TextboxHeight}" Name="HospitalNameTextBox" IsDropDownOpen="True" Text="Vælg Hospital" IsEditable="False" IsReadOnly="True" ItemsSource="{Binding HospitalList}">
+                <ComboBox Grid.Column="0" Grid.Row="0" Height="{StaticResource TextboxHeight}" Name="HospitalNameTextBox" IsDropDownOpen="True" Text="Vælg Hospital" IsEditable="False" IsReadOnly="True" SelectedItem="{Binding SelectedHospital, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding HospitalList}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -36,13 +36,13 @@
                         </DataTemplate> 
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <TextBox Grid.Column="0" Grid.Row="1"  Height="{StaticResource TextboxHeight}" Text="{Binding Transport, UpdateSourceTrigger=PropertyChanged}" x:Name="TransportTextBox"/>
-                <TextBox Grid.Column="0" Grid.Row="2"  Height="{StaticResource TextboxHeight}" Text="{Binding Ambulance, UpdateSourceTrigger=PropertyChanged}" x:Name="AmbulanceTextBox"/>
+               <!-- <TextBox Grid.Column="0" Grid.Row="1"  Height="{StaticResource TextboxHeight}" Text="{Binding Transport, UpdateSourceTrigger=PropertyChanged}" x:Name="TransportTextBox"/>
+                <TextBox Grid.Column="0" Grid.Row="2"  Height="{StaticResource TextboxHeight}" Text="{Binding Ambulance, UpdateSourceTrigger=PropertyChanged}" x:Name="AmbulanceTextBox"/> -->
 
 
                 <Label Content="Hospital name:" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" />
-                <Label Content="Transport:" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" />
-                <Label Content="Ambulance:" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                <!-- <Label Content="Transport:" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" /> 
+                <Label Content="Ambulance:" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Center" /> -->
 
                 <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="3" Grid.Column="0" Content="Bekræft" Command="{Binding }" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
@@ -54,9 +54,9 @@
                     <GridView>
                         <GridViewColumn Header="Fra Hospital" Width="100" DisplayMemberBinding="{Binding StartHospital.Name}" />
                         <GridViewColumn Header="Til Hospital" Width="100" DisplayMemberBinding="{Binding DestinationHospital.Name}" />
-                        <GridViewColumn Header="Patient" Width="100" DisplayMemberBinding="{Binding PatientName}" />
                         <GridViewColumn Header="Afgang" Width="100" DisplayMemberBinding="{Binding ArrivalTime, StringFormat='{}{0:HH:mm}'}" />
                         <GridViewColumn Header="Ankomst" Width="100" DisplayMemberBinding="{Binding TravelTime, StringFormat='{}{0:HH:mm}'}" />
+                        <GridViewColumn Header="Ambulance" Width="100" DisplayMemberBinding="{Binding Id}" />
                     </GridView>
                 </ListView.View>
             </ListView>

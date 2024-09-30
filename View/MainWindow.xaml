@@ -51,6 +51,10 @@
                         <localviews:ChangeAmbulanceView/>
                     </DataTemplate>
 
+                    <DataTemplate DataType="{x:Type localviewmodels:ShowHospitalViewModel}">
+                        <localviews:ShowHospital/>
+                    </DataTemplate>
+
                 </ContentControl.Resources>
             </ContentControl>
         </StackPanel>

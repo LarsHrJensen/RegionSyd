@@ -59,8 +59,10 @@ namespace RegionSyd.Model.Repository.Repository
                     while (reader.Read())
                     {
                         HospitalRepository hospitalRepo = new HospitalRepository(_configuration);
+                        Debug.WriteLine(reader["Station"]);
+                        int Id = reader.GetInt32("Station");
 
-                        Hospital hospital = hospitalRepo.GetById((int)reader["Station"]);
+                        Hospital hospital = hospitalRepo.GetById(Id);
 
 
                         Ambulance amb = new Ambulance(

@@ -34,4 +34,19 @@ public class Hospital
         return true;
     }
 
+    public override bool Equals(object? obj)
+    {
+        if (!(obj is Hospital)) return false;
+
+        if (obj == null) return false;
+
+        Hospital hospital = obj as Hospital;
+
+        if (hospital.Name != Name) return false;
+        if (hospital.Address != Address) return false;
+        if (hospital.City != City) return false;
+        if (hospital.Region != Region) return false;
+        return true;     
+    }
+
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using RegionSyd.ViewModel;
 
 namespace RegionSyd.ViewModel
 {
@@ -41,7 +42,7 @@ namespace RegionSyd.ViewModel
             _config = config;
 
             // Landing viewmodel
-            _currentViewModel = new OverviewViewModel(this, config);
+            _currentViewModel = new ShowHospitalViewModel(config);
              
 
             // navigation command setup

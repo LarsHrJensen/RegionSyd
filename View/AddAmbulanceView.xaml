@@ -49,7 +49,7 @@
                 <Label Content="Status:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
 
                 <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="4" Grid.Column="1" Content="Tilføj ambulance" Command="{Binding CreateAmbulance}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="4" Grid.Column="1" Content="Tilføj ambulance" Command="{Binding SaveChanges}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                
                 <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="5" Grid.Column="1" Content="Slet ambulance" Command="{Binding SaveChanges}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 

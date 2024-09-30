@@ -84,7 +84,27 @@ namespace RegionSyd.Model.Repository.Repository
 
         public void Insert(Ambulance entity)
         {
-            throw new NotImplementedException();
+            string commandText = $"INSERT INTO {_tableName}([Name], [Station], [Status]) VALUES (@Name, @Station, @Status)";
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(commandText, connection);
+
+                command.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar) { Value = entity.Name});
+                command.Parameters.Add(new SqlParameter("@Station", SqlDbType.Int) { Value = entity.Hospital.Id});
+                command.Parameters.Add(new SqlParameter("@Status", SqlDbType.VarChar) { Value = entity.Status });
+
+                connection.Open();
+
+                int result = command.ExecuteNonQuery();
+                if (result == 0)
+                {
+                    Store.MessageStore.Message = "Error : Ambulance not added";
+                }
+                else
+                {
+                    Store.MessageStore.Message = "Success! Ambulance added.";
+                }
+            }
         }
 
         public void Update(Ambulance entity)

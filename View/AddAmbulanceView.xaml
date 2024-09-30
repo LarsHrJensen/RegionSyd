@@ -26,19 +26,27 @@
 
                 </Grid.RowDefinitions>
 
-                <TextBox Grid.Row="0"  Grid.Column="1" Name="Ambulancenavn" >
+                <TextBox Grid.Row="0"  Grid.Column="1" Name="Ambulancenavn" Text="{Binding AmbulanceName}" >
                 </TextBox>
 
-                <ComboBox Grid.Row="1"  Grid.Column="1" Name="FromStation" ItemsSource="{Binding}">
+                <ComboBox Grid.Row="1"  Grid.Column="1" Name="FromStation" ItemsSource="{Binding Hospitals}" SelectedItem="{Binding AmbulanceHospital}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Margin="5" Text="{Binding Name, Mode=OneTime}"/>
+                                <TextBlock Margin="5" Text="{Binding City, Mode=OneTime}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
-                <ComboBox Grid.Row="2"  Grid.Column="1" Name="Status" ItemsSource="{Binding Statuses}">
+                <ComboBox Grid.Row="2"  Grid.Column="1" Name="Status" ItemsSource="{Binding Statuses}" SelectedItem="{Binding AmbulanceStatus}">
                 </ComboBox>
 
                 <Label Content="Ambulancenummer:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Hospital:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
                 <Label Content="Status:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
 
-                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="4" Grid.Column="1" Content="Tilføj ambulance" Command="{Binding SaveChanges}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="4" Grid.Column="1" Content="Tilføj ambulance" Command="{Binding CreateAmbulance}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
 
             </Grid>

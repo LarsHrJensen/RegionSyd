@@ -31,7 +31,6 @@
                         <localviews:AddTransportView/>
                     </DataTemplate>
 
-
                     <DataTemplate DataType="{x:Type localviewmodels:AddAmbulanceViewModel}">
                         <localviews:AddAmbulanceView/>
                     </DataTemplate>

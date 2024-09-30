@@ -8,57 +8,56 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White"
              >
-    <Grid >
-        <StackPanel Orientation ="Horizontal">
-
-            <Grid Margin="20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="200"/>
-                </Grid.ColumnDefinitions>
+    <Grid Margin="{StaticResource DefaultMargin}">
+      
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
 
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
 
-                </Grid.RowDefinitions>
+        </Grid.RowDefinitions>
 
-                <ComboBox Grid.Row="0"  Grid.Column="1" Name="FromHospital" ItemsSource="{Binding Hospitals}">
-                </ComboBox>
-                
-                <ComboBox Grid.Row="2"  Grid.Column="1" Name="ToHospital" ItemsSource="{Binding}">
-                </ComboBox>
+        <ComboBox Grid.Row="0"  Grid.Column="1" Name="FromHospital" ItemsSource="{Binding Hospitals}" SelectedItem="{Binding FromHospital}">
+            
+        </ComboBox>
 
-                <ComboBox Grid.Row="1"  Grid.Column="1" Name="Time" ItemsSource="{Binding}">
-                </ComboBox>
+        <ComboBox Grid.Row="1"  Grid.Column="1" Name="Time" ItemsSource="{Binding Hospitals}" SelectedItem="{Binding ToHospital}">
+        </ComboBox >
 
-                <Calendar Grid.Row="3" Grid.Column="1" Name="Calender" HorizontalAlignment="Center" VerticalAlignment="Center" Width="180" Height="36"/>
+
+        <TextBox Grid.Row="2"  Grid.Column="1" Name="ToHospital" Text="{Binding TimeOfArrival}" />
+
+        <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Patients}" SelectedItem="{Binding Patient}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding FullName}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        
+
+        <DatePicker Grid.Row="3" Grid.Column="1" Name="Calender" HorizontalAlignment="Center" VerticalAlignment="Center" Width="180" Height="36" SelectedDate="{Binding DateOfArrival}"/>
                
-                <Label Content="Fra hospital:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                <Label Content="Til hospital:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                <Label Content="Tid:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
-                <Label Content="Kalender:" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <Label Content="Fra hospital:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <Label Content="Til hospital:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <Label Content="Tid:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <Label Content="Kalender:" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <Label Content="Patient:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalContentAlignment="Right"/>
 
-                <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="4" Grid.Column="1" Content="Bekræft ændring" Command="{Binding SaveChanges}" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click"/>
-
-
-            </Grid>
+        <Button Background="ForestGreen" Foreground="White" Padding="4" FontSize="18" FontWeight="Medium" Grid.Row="5" Grid.Column="1" Content="Bekræft ændring" Command="{Binding SaveChanges}" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click"/>
 
 
-            <ListView Margin="20" Height="378" Width="300" Name="ActualTransports" ItemsSource="{Binding Change}">
-                <ListView.View >
-                    <GridView>
-
-                        <GridViewColumn Header="Aktuelle kørsler" Width="150" DisplayMemberBinding="{Binding FromHospital}" />
-                        <GridViewColumn Header="Ændret til: " Width="150" DisplayMemberBinding="{Binding ChangedProperty}" />
-
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
+      
     </Grid>
 </UserControl>

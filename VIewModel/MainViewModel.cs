@@ -37,23 +37,17 @@ namespace RegionSyd.ViewModel
 
         public MainViewModel(IConfiguration config)
         {
+
+            _config = config;
+
             // Landing viewmodel
             _currentViewModel = new OverviewViewModel(this, config);
              
-            Statuses = new List<string>();
-            Statuses.Add("Aktiv");
-            Statuses.Add("Standby");
-            Statuses.Add("Inaktiv");
-
-
-            //_currentViewModel = new AddAmbulanceViewModel(Statuses);
-
 
             // navigation command setup
             NavCreatePatient = new(navCreatePatient);
             NavCreateTransport = new(navCreateTransport);
             NavOverview = new(navOverview);
-            _config = config;
             NavCreateAmbulance = new(navCreateAmbulance);
 
         }
@@ -73,7 +67,7 @@ namespace RegionSyd.ViewModel
         }
         private void navCreateAmbulance()
         {
-            CurrentViewModel = new AddAmbulanceViewModel(_config, Statuses);
+            CurrentViewModel = new AddAmbulanceViewModel(_config);
         }
 
 

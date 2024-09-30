@@ -30,10 +30,10 @@ namespace RegionSyd.ViewModel
         IConfiguration _configuration;
 
 
-        public AddAmbulanceViewModel(IConfiguration config,  List<string> statuses)
+        public AddAmbulanceViewModel(IConfiguration config)
         {
             _configuration = config;
-            Statuses = statuses;
+            Statuses = StatusStore.Statuses;
             ambulanceRepo = new AmbulanceRepository(config);
             AddedAmbulances = new(ambulanceRepo.GetAll());
             CreateAmbulance = new(IsValidAmbulanceData, CreateNewAmbulance);

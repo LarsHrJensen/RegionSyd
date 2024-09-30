@@ -10,7 +10,17 @@
 
         <Thickness x:Key="DefaultMargin">20</Thickness>
         <Thickness x:Key="SmallMargin">5</Thickness>
-        
+
+
+        <!--<Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="{StaticResource SmallMargin}"/>
+            
+        </Style>-->
+
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="{StaticResource SmallMargin}"/>
+            <!--<Setter Property="Margin" Value="{StaticResource SmallMargin}"/>-->
+        </Style>
 
     </Application.Resources>
 </Application>

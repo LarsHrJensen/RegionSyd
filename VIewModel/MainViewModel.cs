@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace RegionSyd.ViewModel
 {
-    internal class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
 
         // TODO : Determin whether to instantiate VMs during runtime, or do them all in the beginning and save them in memory until needed?
@@ -20,6 +20,7 @@ namespace RegionSyd.ViewModel
         public NavigationCommand NavCreateTransport { get; }
         public NavigationCommand NavOverview { get; }
         public NavigationCommand NavCreateAmbulance { get; }
+        public NavigationCommand NavSearchTransport { get; }
 
         List<string> Statuses;
         private readonly IConfiguration _config;
@@ -49,7 +50,7 @@ namespace RegionSyd.ViewModel
             NavCreateTransport = new(navCreateTransport);
             NavOverview = new(navOverview);
             NavCreateAmbulance = new(navCreateAmbulance);
-
+            NavSearchTransport = new(navSearchTransport);
         }
 
         // Could be rewrote into lambda instead of this, would be prettier code, but less readable
@@ -89,6 +90,11 @@ namespace RegionSyd.ViewModel
         public void NavHospitalOverview(Hospital hospital)
         {
 
+        }
+
+        private void navSearchTransport()
+        {
+            CurrentViewModel = new SearchTransportViewModel(_config, this);
         }
 
    

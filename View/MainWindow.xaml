@@ -16,6 +16,7 @@
                 <Button Content="CreateTransport" Command="{Binding NavCreateTransport}" Padding="{StaticResource SmallMargin}"/>
                 <Button Content="Overview" Command="{Binding NavOverview}" Padding="{StaticResource SmallMargin}"/>
                 <Button Content="CreateAmbulance" Command="{Binding NavCreateAmbulance}" Padding="{StaticResource SmallMargin}"/>
+                <Button Content="SearchTransport" Command="{Binding NavSearchTransport}" Padding="{StaticResource SmallMargin}"/>
 
                 <!--<Button Content="AddPatient" Command="{Binding NavigateAddPatient}"/>-->
             </StackPanel>
@@ -49,6 +50,10 @@
 
                     <DataTemplate DataType="{x:Type localviewmodels:ChangeAmbulanceViewModel}">
                         <localviews:ChangeAmbulanceView/>
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type localviewmodels:SearchTransportViewModel}">
+                        <localviews:SearchTransportView/>
                     </DataTemplate>
 
                 </ContentControl.Resources>

@@ -11,12 +11,12 @@
     <Grid>
         <StackPanel Orientation="Vertical">
             <!-- Navigation bar -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Button Content="CreatePatient" Command="{Binding NavCreatePatient}" Padding="{StaticResource SmallMargin}"/>
-                <Button Content="CreateTransport" Command="{Binding NavCreateTransport}" Padding="{StaticResource SmallMargin}"/>
-                <Button Content="Overview" Command="{Binding NavOverview}" Padding="{StaticResource SmallMargin}"/>
-                <Button Content="CreateAmbulance" Command="{Binding NavCreateAmbulance}" Padding="{StaticResource SmallMargin}"/>
-                <Button Content="SearchTransport" Command="{Binding NavSearchTransport}" Padding="{StaticResource SmallMargin}"/>
+            <StackPanel Name="NavBar"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button Name="CreatePatient" Content="CreatePatient" Command="{Binding NavCreatePatient}" Padding="{StaticResource SmallMargin}"/>
+                <Button Name="CreateTransport" Content="CreateTransport" Command="{Binding NavCreateTransport}" Padding="{StaticResource SmallMargin}"/>
+                <Button Name="Overview" Content="Overview" Command="{Binding NavOverview}" Padding="{StaticResource SmallMargin}"/>
+                <Button Name="CreateAmbulance" Content="CreateAmbulance" Command="{Binding NavCreateAmbulance}" Padding="{StaticResource SmallMargin}"/>
+                <Button Name="SearchTransport" Content="SearchTransport" Command="{Binding NavSearchTransport}" Padding="{StaticResource SmallMargin}"/>
 
                 <!--<Button Content="AddPatient" Command="{Binding NavigateAddPatient}"/>-->
             </StackPanel>

@@ -26,6 +26,8 @@ namespace RegionSyd.ViewModel
         List<string> Statuses;
         private readonly IConfiguration _config;
 
+        public event EventHandler VMChanged;
+
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
         {
@@ -34,6 +36,7 @@ namespace RegionSyd.ViewModel
             {
                 _currentViewModel = value;
                 OnPropertyChanged(nameof(CurrentViewModel));
+                VMChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

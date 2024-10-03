@@ -27,12 +27,12 @@ namespace RegionSyd.View
     public partial class MainWindow : Window
     {
 
-        
 
+        MainViewModel mainViewModel;
         public MainWindow(IConfiguration config)
         {
             
-            MainViewModel mainViewModel = new MainViewModel(config);
+            mainViewModel = new MainViewModel(config);
             this.DataContext = mainViewModel;
             
             // Message shower
@@ -44,7 +44,52 @@ namespace RegionSyd.View
                 MessageStore.Message = string.Empty;
             };
 
+            mainViewModel.VMChanged += HighlightNavButton;
+
             InitializeComponent();
+        }
+
+        private void HighlightNavButton(object? sender, EventArgs e)
+        {
+
+            ClearMarkings();
+            switch (mainViewModel.CurrentViewModel)
+            {
+                case (OverviewViewModel):
+                    HighlightButton(Overview);
+                    break;
+
+                case (AddPatientViewModel):
+                    HighlightButton(CreatePatient);
+                    break;
+
+                case (AddTransportViewModel): 
+                    HighlightButton(CreateTransport);
+                    break;
+
+                case (AddAmbulanceViewModel):
+                    HighlightButton(CreateAmbulance);
+                    break;
+
+                case (SearchTransportViewModel):
+                    HighlightButton(SearchTransport);
+                    break;
+            }
+        }
+
+        private void ClearMarkings()
+        {
+            foreach (Button item in NavBar.Children)
+            {
+                item.Background = Brushes.LightGray;
+
+            }
+        }
+
+        private void HighlightButton(Button button)
+        {
+            button.Background = Brushes.CadetBlue;
+            //button.Foreground = Brushes.White;
         }
 
     }

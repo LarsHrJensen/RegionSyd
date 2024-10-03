@@ -39,7 +39,6 @@
 
             <ComboBox Grid.Row="2" Grid.Column="1" Name="Status" ItemsSource="{Binding Statuses}" SelectedItem="{Binding AmbulanceStatus}" />
 
-            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Statuses}" />
 
 
             <Label Content="Ambulancenummer:" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" />

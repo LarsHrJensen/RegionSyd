@@ -171,5 +171,124 @@ namespace RegionSyd.Model.Repository
                 }
             }
         }
+
+
+        public IEnumerable<Transport> Find(Dictionary<string, object?> args)
+        {
+            StringBuilder commandText = new StringBuilder($"SELECT * FROM {_tableName}");
+
+            // Check if any args are set
+            bool set = false;
+            foreach(KeyValuePair<string, object> arg in args)
+            {
+                if (arg.Value != null)
+                {
+                    set = true;
+                }
+            }
+            if (set) commandText.Append(" WHERE");
+
+
+
+
+
+            if (args.ContainsKey("FromHospital") && args["FromHospital"] != null) commandText.Append(
+                " [From]=@From "
+                );
+            if (args.ContainsKey("ToHospital") && args["ToHospital"] != null) commandText.Append(
+            " [To]=@To "
+            );
+            if (args.ContainsKey("Patient") && args["Patient"] != null) commandText.Append(
+            " [Patient]=@Patient "
+            );
+
+
+            commandText.Replace("  ", " AND ");
+
+            
+
+            using (SqlConnection connection = new(_connectionString))
+            {
+                
+
+                SqlCommand command = new(commandText.ToString(), connection);
+
+                if (set)
+                {
+                    if (args.ContainsKey("FromHospital")) Debug.WriteLine("Shit fuck");
+
+                    if (args.ContainsKey("FromHospital") && args["FromHospital"] != null) command.Parameters.Add(new SqlParameter("@From", SqlDbType.Int) { Value = ((Hospital)args["FromHospital"]).Id });
+                    if (args.ContainsKey("ToHospital") && args["ToHospital"] != null) command.Parameters.Add(new SqlParameter("@To", SqlDbType.Int) { Value = ((Hospital)args["ToHospital"]).Id });
+                    if (args.ContainsKey("Patient") && args["Patient"] != null) command.Parameters.Add(new SqlParameter("@Patient", SqlDbType.Int) { Value = ((Patient)args["Patient"]).Id });
+                }
+
+                string query = command.CommandText;
+
+                foreach (SqlParameter p in command.Parameters)
+                {
+                    query = query.Replace(p.ParameterName, p.Value.ToString());
+                }
+
+                Debug.WriteLine(command.CommandText);
+
+                List<Transport> result = new List<Transport>();
+
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    List<Hospital> hospitals = new();
+                    List<Patient> patients = new();
+
+                    HospitalRepository hospitalRepository = new(_configuration);
+                    PatientRepository patientRepository = new(_configuration);
+
+                    hospitals = new(hospitalRepository.GetAll());
+                    patients = new(patientRepository.GetAll());
+
+                    while (reader.Read())
+                    {
+                        Predicate<Hospital> findFromHospital = (hospital) =>
+                        {
+                            return (hospital.Id == (int)reader["From"]);
+                        };
+
+                        Hospital fromHospital = hospitals.Find(findFromHospital);
+
+                        Predicate<Hospital> findToHospital = (hospital) =>
+                        {
+                            return (hospital.Id == (int)reader["To"]);
+                        };
+
+                        Hospital toHospital = hospitals.Find(findToHospital);
+
+                        if (fromHospital is null || toHospital is null)
+                        {
+                            throw new Exception("Something fucky wucky happend.");
+                        }
+
+                        Predicate<Patient> findPatient = (patient) =>
+                        {
+                            return (patient.Id == (int)reader["Id"]);
+                        };
+
+                        Patient patient = patients.Find(findPatient);
+
+                        Transport transport = new(
+                            fromHospital, toHospital, (DateTime)reader["Arrival"], patient
+                            );
+
+
+                        result.Add(transport);
+                    }
+
+                }
+
+                return result;
+            }
+
+
+
+        }
     }
 }

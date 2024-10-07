@@ -50,15 +50,31 @@ namespace RegionSyd.ViewModel
 
         private readonly IConfiguration _configuration;
 
-        public ShowHospitalViewModel(IConfiguration config)
+        public ShowHospitalViewModel(IConfiguration config, Hospital hospital)
         {
             _configuration = config;
 
-            transportRepo = new TransportRepository(config);
             HospitalRepository hospitalRepo = new HospitalRepository(config);
 
+            List<Hospital> hospitals = new(hospitalRepo.GetAll());
+
+            // make sure selectedHospital actually exists in list for combobox 
+            // So the selected item can be the hospital when this VM is opened
+            foreach(var item in hospitals)
+            {
+                if (item.Equals(hospital))
+                {
+                    selectedHospital = item;
+                }
+            }
+
+
+            transportRepo = new TransportRepository(config);
+
             TransportList = new ObservableCollection<Transport>(transportRepo.GetAll());
-            HospitalList = new ObservableCollection<Hospital>(hospitalRepo.GetAll());
+            HospitalList = new ObservableCollection<Hospital>(hospitals);
+
+            UpdateTransport();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="RegionSyd.View.ShowHospital"
+﻿<UserControl x:Class="RegionSyd.View.ShowHospitalView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -27,7 +27,7 @@
                     <RowDefinition Height="100"/>
                 </Grid.RowDefinitions>
 
-                <ComboBox Grid.Column="0" Grid.Row="0" Height="{StaticResource TextboxHeight}" Name="HospitalNameTextBox" IsDropDownOpen="True" Text="Vælg Hospital" IsEditable="False" IsReadOnly="True" SelectedItem="{Binding SelectedHospital, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding HospitalList}">
+                <ComboBox Grid.Column="0" Grid.Row="0" Height="{StaticResource TextboxHeight}" Name="HospitalNameTextBox" Text="Vælg Hospital" IsReadOnly="True" SelectedItem="{Binding SelectedHospital, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ItemsSource="{Binding HospitalList}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>

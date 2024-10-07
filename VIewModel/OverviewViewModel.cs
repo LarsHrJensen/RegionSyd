@@ -66,5 +66,16 @@ namespace RegionSyd.ViewModel
             mainViewmodel.NavChangePatient(selectedPatient);
         }
 
+        public void NavigateShowHospital(Hospital selectedHospital)
+        {
+            if(selectedHospital == null) return;
+            mainViewmodel.NavShowHospital(selectedHospital);
+        }
+
+        public void NavigateShowAmbulance(Ambulance ambulance)
+        {
+            if(ambulance == null) return;
+            mainViewmodel.NavShowAmbulance(ambulance);
+        }
     }
 }

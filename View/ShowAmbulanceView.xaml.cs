@@ -18,9 +18,9 @@ namespace RegionSyd.View
     /// <summary>
     /// Interaction logic for ShowAmbulance.xaml
     /// </summary>
-    public partial class ShowAmbulance : UserControl
+    public partial class ShowAmbulanceView : UserControl
     {
-        public ShowAmbulance()
+        public ShowAmbulanceView()
         {
             InitializeComponent();
         }

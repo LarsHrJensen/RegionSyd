@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using RegionSyd.ViewModel;
+using System.Diagnostics;
 
 namespace RegionSyd.ViewModel
 {
@@ -46,7 +47,7 @@ namespace RegionSyd.ViewModel
             _config = config;
 
             // Landing viewmodel
-            _currentViewModel = new ShowHospitalViewModel(config);
+            _currentViewModel = new OverviewViewModel(this, config);
              
 
             // navigation command setup
@@ -91,15 +92,22 @@ namespace RegionSyd.ViewModel
             CurrentViewModel = new ChangeTransportViewModel(_config, transport);
         }
 
-        public void NavHospitalOverview(Hospital hospital)
+        public void NavShowHospital(Hospital hospital)
         {
+            CurrentViewModel = new ShowHospitalViewModel(_config,  hospital);
+        }
 
+        public void NavShowAmbulance(Ambulance ambulance)
+        {
+            CurrentViewModel = new ShowAmbulanceViewModel(_config, ambulance);
         }
 
         private void navSearchTransport()
         {
             CurrentViewModel = new SearchTransportViewModel(_config, this);
         }
+
+
 
    
 

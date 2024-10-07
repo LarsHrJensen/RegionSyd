@@ -11,6 +11,7 @@ namespace RegionSyd.Model.Command
     {
         Predicate<object> MethodCanExecute { get; set; }
         Action<object> MethodExecute { get; set; }
+
         public event EventHandler CanExecuteChanged;
 
         public RelayCommand(Predicate<object> canExecute, Action<object> execute)

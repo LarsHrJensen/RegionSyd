@@ -64,7 +64,42 @@ namespace RegionSyd.Model.Repository
 
         public Patient GetById(int id)
         {
-            throw new NotImplementedException();
+            string commandText = $"SELECT * FROM {_tableName} WHERE Id=@Id";
+
+            using (SqlConnection connection = new(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(commandText, connection);
+
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = id });
+
+                connection.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (!reader.Read())
+                    {
+                        throw new Exception($"No results found for id:{id}");
+                    }
+
+                    Patient patient;
+
+                    string fullName = reader.GetString("Name");
+                    string status = reader.GetString("Status");
+                    int patientId = reader.GetInt32("Id");
+                    string cpr = "0000000000";
+
+                    patient = new(cpr, fullName, status, patientId);
+
+
+                    if (reader.Read())
+                    {
+                        throw (new Exception("Too many results"));
+                    }
+
+                    return patient;
+                }
+
+            }
         }
 
         public void Insert(Patient entity)

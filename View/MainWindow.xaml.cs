@@ -49,6 +49,30 @@ namespace RegionSyd.View
             InitializeComponent();
         }
 
+        public MainWindow(IConfiguration config, ViewModelBase shown)
+        {
+            mainViewModel = new MainViewModel(config);
+            this.DataContext = mainViewModel;
+
+
+            mainViewModel.CurrentViewModel = shown;
+
+            // Message shower
+            MessageStore.Updated += (obj, e) =>
+            {
+                if (string.IsNullOrEmpty(MessageStore.Message)) return;
+
+                MessageBox.Show(MessageStore.Message);
+                MessageStore.Message = string.Empty;
+            };
+
+            mainViewModel.VMChanged += HighlightNavButton;
+
+            InitializeComponent();
+
+            NavBar.Visibility = Visibility.Hidden;
+        }
+
         private void HighlightNavButton(object? sender, EventArgs e)
         {
 

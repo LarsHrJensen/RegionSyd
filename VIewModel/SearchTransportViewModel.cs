@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RegionSyd.Model;
 using System.Diagnostics;
+using RegionSyd.Model.Command;
 
 namespace RegionSyd.ViewModel
 {
@@ -18,9 +19,23 @@ namespace RegionSyd.ViewModel
         IConfiguration _configuration;
         MainViewModel _mainViewModel;
 
+        public static SearchTransportViewModel Instance { get; private set; }
+
         public ObservableCollection<Hospital> Hospitals { get; }
+
         public ObservableCollection<Transport> Transports { get; private set; }
         public ObservableCollection<Patient> Patients { get; }
+
+        private Transport selectedTransport;
+        public Transport SelectedTransport
+        {
+            get { return selectedTransport; }
+            set 
+            { 
+                selectedTransport = value;
+            }
+        }
+
 
         TransportRepository _transportRepository;
         HospitalRepository _hospitalRepository;
@@ -61,7 +76,18 @@ namespace RegionSyd.ViewModel
             }
         }
 
-        public SearchTransportViewModel(IConfiguration config, MainViewModel mv)
+
+        private Ambulance ambulance;
+        public Ambulance Ambulance
+        {
+            get { return ambulance; }
+            set { ambulance = value; }
+        }
+
+        Action<Transport> addTransportCallback;
+        public RelayCommand AddTransport { get; }
+
+        public SearchTransportViewModel(IConfiguration config, MainViewModel mv, Ambulance amb=null, Action<Transport> addTransport=null)
         {
             _configuration = config;
             _mainViewModel = mv;
@@ -75,6 +101,48 @@ namespace RegionSyd.ViewModel
             Transports = new ObservableCollection<Transport>(_transportRepository.GetAll());
             Patients = new ObservableCollection<Patient>(patientRepository.GetAll());
 
+            if(amb != null)
+            {
+                fromHospital = amb.Hospital;
+                ambulance = amb;
+            }
+            if (addTransport != null)
+            {
+                RemoveAssignedTransports();
+                addTransportCallback = addTransport;
+                AddTransport = new RelayCommand(CanAddTransport, AddTransportMethod);
+
+            }
+
+            Instance = this;
+        }
+
+
+        private void RemoveAssignedTransports()
+        {
+            Predicate<Transport> isAssigned = (transport) =>
+            {
+                return _transportRepository.IsAssigned(transport);
+            };
+
+            List<Transport> unAssignedTransports = new List<Transport>(Transports);
+
+            unAssignedTransports.RemoveAll(isAssigned);
+
+            Transports = new ObservableCollection<Transport>(unAssignedTransports);
+
+            
+        }
+
+        private void AddTransportMethod(object param)
+        {
+            addTransportCallback?.Invoke(selectedTransport);   
+        }
+
+        private bool CanAddTransport(object param)
+        {
+            // implement
+            return true;
         }
 
         private void updateSearch()
@@ -93,8 +161,11 @@ namespace RegionSyd.ViewModel
 
 
             Transports = new(_transportRepository.Find(arguments));
-            OnPropertyChanged(nameof(Transports));
 
+            if(ambulance!=null) RemoveAssignedTransports();
+
+            OnPropertyChanged(nameof(Transports));
         }
+
     }
 }

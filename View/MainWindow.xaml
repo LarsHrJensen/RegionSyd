@@ -53,13 +53,17 @@
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type localviewmodels:ShowHospitalViewModel}">
-                        <localviews:ShowHospital/>
+                        <localviews:ShowHospitalView/>
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type localviewmodels:SearchTransportViewModel}">
                         <localviews:SearchTransportView/>
                     </DataTemplate>
 
+                    <DataTemplate DataType="{x:Type localviewmodels:ShowAmbulanceViewModel}">
+                        <localviews:ShowAmbulanceView/>
+                    </DataTemplate>
+                    
                 </ContentControl.Resources>
             </ContentControl>
         </StackPanel>

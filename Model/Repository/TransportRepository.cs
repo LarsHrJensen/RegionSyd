@@ -18,15 +18,18 @@ namespace RegionSyd.Model.Repository
         SqlConnection _connection;
         string _connectionString;
 
+        string _hasTransportTable;
+
         IConfiguration _configuration;
 
         string _tableName;
         // I f*ing hate dependency injection, give me lethal injection instead
-        public TransportRepository(IConfiguration config, string tableName="Transports")
+        public TransportRepository(IConfiguration config, string tableName = "Transports", string hasTransportTableName = "AssignedAmbulances")
         {
             _configuration = config;
             _connectionString = config.GetConnectionString("SQLAuth");
             _tableName = tableName;
+            _hasTransportTable = hasTransportTableName;
         }
 
         public void Delete(Transport entity)
@@ -76,7 +79,7 @@ namespace RegionSyd.Model.Repository
 
                         Hospital toHospital = hospitals.Find(findToHospital);
 
-                        if(fromHospital is null || toHospital is null)
+                        if (fromHospital is null || toHospital is null)
                         {
                             throw new Exception("Something fucky wucky happend.");
                         }
@@ -88,16 +91,10 @@ namespace RegionSyd.Model.Repository
 
                         Patient patient = patients.Find(findPatient);
 
-                        Debug.WriteLine("");
-                        Debug.WriteLine("");
-                        Debug.WriteLine("");
-                        Debug.WriteLine(reader["Arrival"]);
-                        Debug.WriteLine("");
-                        Debug.WriteLine("");
-                        Debug.WriteLine("");
+                        int id = reader.GetInt32("Id");
 
                         Transport transport = new(
-                            fromHospital, toHospital, (DateTime)reader["Arrival"], patient
+                            fromHospital, toHospital, (DateTime)reader["Arrival"], patient, 0, id
                             );
 
 
@@ -111,9 +108,88 @@ namespace RegionSyd.Model.Repository
 
         public Transport GetById(int id)
         {
-            throw new NotImplementedException();
+            string commandText = $"SELECT * FROM {_tableName} WHERE [Id]=@Id";
+
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(commandText, connection);
+
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = id });
+
+                connection.Open();
+
+                int transportId;
+                Hospital startHospital, destinationHospital;
+                Patient patient;
+                DateTime arrivalTime;
+
+                Transport transport;
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (!reader.Read())
+                    {
+                        throw new Exception("No results found");
+                    }
+
+                    transportId = reader.GetInt32("Id");
+
+                    HospitalRepository hospitalRepo = new(_configuration);
+                    PatientRepository patientRepo = new(_configuration);
+
+                    int startId, destinationId, patientId;
+
+                    Debug.WriteLine("gets here");
+
+                    startId = reader.GetInt32("From");
+                    destinationId = reader.GetInt32("To");
+                    patientId = reader.GetInt32("Patient");
+
+                    startHospital = hospitalRepo.GetById(startId);
+                    destinationHospital = hospitalRepo.GetById(destinationId);
+                    patient = patientRepo.GetById(patientId);
+
+                    arrivalTime = reader.GetDateTime("Arrival");
+
+                    transport = new(startHospital, destinationHospital, arrivalTime, patient, 0, transportId);
+
+
+                    if (reader.Read())
+                    {
+                        throw new Exception("Too many results found");
+                    }
+
+                    return transport;
+                }
+
+
+            }
         }
-        
+
+        public IEnumerable<Transport> GetByAmbulance(Ambulance ambulance)
+        {
+            string commandText = $"SELECT * FROM {_hasTransportTable} WHERE [Ambulance]=@Ambulance";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(commandText, connection);
+                command.Parameters.Add(new SqlParameter("@Ambulance", SqlDbType.Int) { Value = ambulance.Id });
+                connection.Open();
+                List<Transport> result = new List<Transport>();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int transportId = (int)reader["Transport"];
+                        result.Add(GetById(transportId));
+                    }
+                }
+                return result;
+            }
+        }
+
         public void Insert(Transport entity)
         {
             string commandText = $"INSERT INTO {_tableName}([From], [To], [Patient], [Arrival]) VALUES (@From, @To, @Patient, @Arrival)";
@@ -139,6 +215,58 @@ namespace RegionSyd.Model.Repository
                 {
                     Store.MessageStore.Message = "Success! Transport added.";
                 }
+            }
+        }
+
+        public void AssignAmbulanceToTransport(Ambulance ambulance, Transport transport)
+        {
+            string commandText = $"INSERT INTO {_hasTransportTable}([Ambulance], [Transport]) VALUES (@Ambulance, @Transport)";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(commandText, connection);
+
+                command.Parameters.Add(new SqlParameter("@Ambulance", SqlDbType.Int) { Value = ambulance.Id });
+                command.Parameters.Add(new SqlParameter("@Transport", SqlDbType.Int) { Value = transport.Id });
+
+                Debug.WriteLine(ambulance.Id);
+                Debug.WriteLine(transport.Id);
+
+
+                connection.Open();
+
+                int result = command.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    throw new Exception("Could not assign ambulance");
+                }
+                else if (result == 1)
+                {
+                    MessageStore.Message = $"Successfully assigned {ambulance.Name} to transport id : {transport.Id}";
+                }
+                else
+                {
+                    throw new Exception("Not even sure what happend here");
+                }
+            }
+        }
+
+        public bool IsAssigned(Transport entity)
+        {
+            string commandText = $"SELECT COUNT(*) FROM {_hasTransportTable} WHERE [Transport]=@Transport";
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(commandText, connection);
+
+                command.Parameters.Add(new SqlParameter("@Transport", SqlDbType.Int) { Value = entity.Id });
+
+                connection.Open();
+
+                int result = (int)command.ExecuteScalar();
+
+                return result != 0;
             }
         }
 
@@ -274,8 +402,10 @@ namespace RegionSyd.Model.Repository
 
                         Patient patient = patients.Find(findPatient);
 
+                        int id = reader.GetInt32("Id");
+
                         Transport transport = new(
-                            fromHospital, toHospital, (DateTime)reader["Arrival"], patient
+                            fromHospital, toHospital, (DateTime)reader["Arrival"], patient, 0, id
                             );
 
 

@@ -22,6 +22,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
   
         </Grid.RowDefinitions>
 
@@ -75,7 +76,7 @@
 
         <!-- Very scuffed solution to allow listview to expand past borders -->
         <Canvas Grid.Column="2">
-            <ListView   Width="500" Height="400" Name="HospitalListView" ItemsSource="{Binding Transports}" ClipToBounds="False">
+            <ListView   Width="500" Height="400" Name="HospitalListView" SelectionMode="Single" ItemsSource="{Binding Transports}" SelectedItem="{Binding SelectedTransport, UpdateSourceTrigger=PropertyChanged}" ClipToBounds="False">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Fra Hospital" Width="auto" DisplayMemberBinding="{Binding StartHospital.Name}" />
@@ -87,7 +88,8 @@
                 </ListView.View>
             </ListView>
         </Canvas>
-        
-        
+
+        <Button Name="AddButton" Margin="{StaticResource SmallMargin}" Grid.Row="5" Background="Green" Foreground="White" FontWeight="Bold"  Content="Tilføj" Command="{Binding AddTransport}" />
+
     </Grid>
 </UserControl>

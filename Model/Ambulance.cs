@@ -26,35 +26,28 @@ namespace RegionSyd.Model
             if (id > 0) Id = id;
         }
 
-        // Idea is, we don't know Id before added to DB, Insert query results in identity 
-        // So we can save the int as result, and put it here on the object itself.
-        public void SetId(int id)
-        {
-            Id = id;
-        }
+        //public void AssignTask(Transport assign)
+        //{
+        //    Tasks.Add(assign);
+        //    MessageStore.Message = "Task successfully assigned.";
+        //}
 
-        public void AssignTask(Transport assign)
-        {
-            Tasks.Add(assign);
-            MessageStore.Message = "Task successfully assigned.";
-        }
+        //public void CompleteTask(Transport complete)
+        //{
+        //    Tasks.Remove(complete);
+        //    MessageStore.Message = "Task completed.";
+        //}
 
-        public void CompleteTask(Transport complete)
-        {
-            Tasks.Remove(complete);
-            MessageStore.Message = "Task completed.";
-        }
+        //public void RemoveTask(Transport remove)
+        //{
+        //    Tasks.Remove(remove);
+        //    MessageStore.Message = "Task removed successfully.";
+        //}
 
-        public void RemoveTask(Transport remove)
-        {
-            Tasks.Remove(remove);
-            MessageStore.Message = "Task removed successfully.";
-        }
-
-        public List<Transport> GetTasks()
-        {
-            return Tasks;
-        }
+        //public List<Transport> GetTasks()
+        //{
+        //    return Tasks;
+        //}
 
 
         public bool IsValid()

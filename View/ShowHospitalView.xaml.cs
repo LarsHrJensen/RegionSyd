@@ -17,9 +17,9 @@ namespace RegionSyd.View
     /// <summary>
     /// Interaction logic for ShowHospital.xaml
     /// </summary>
-    public partial class ShowHospital : UserControl
+    public partial class ShowHospitalView : UserControl
     {
-        public ShowHospital()
+        public ShowHospitalView()
         {
             InitializeComponent();
         }

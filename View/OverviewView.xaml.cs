@@ -36,14 +36,18 @@ namespace RegionSyd.View
             HospitalListOverview.SelectionChanged += (obj, e) =>
             {
                 ListView lv = (ListView)obj;
-                
+                Hospital selected = (Hospital)lv.SelectedItem;
+                ovm.NavigateShowHospital(selected);
+
             };
+
             AmbulanceListOverview.SelectionChanged += (obj, e) =>
             {
                 ListView lv = (ListView)obj;
                 Ambulance selected = (Ambulance)lv.SelectedValue;
-                ovm.NavigateChangeAmbulance(selected);
+                ovm.NavigateShowAmbulance(selected);
             };
+
             PatientListOverview.SelectionChanged += (obj, e) =>
             {
                 ListView lv = (ListView)obj;

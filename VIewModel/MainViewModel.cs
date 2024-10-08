@@ -31,13 +31,7 @@ namespace RegionSyd.ViewModel
 
         public event EventHandler VMChanged;
 
-        private ViewModelBase prevVM;
-        public ViewModelBase PrevVM
-        {
-            get { return prevVM; }
-            set { prevVM = value; }
-        }
-
+        private Stack<ViewModelBase> prevVM;
 
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -45,7 +39,7 @@ namespace RegionSyd.ViewModel
             get { return _currentViewModel; }
             set
             {
-                prevVM = _currentViewModel;
+                prevVM.Push(_currentViewModel);
                 _currentViewModel = value;
                 OnPropertyChanged(nameof(CurrentViewModel));
                 VMChanged?.Invoke(this, EventArgs.Empty);
@@ -54,12 +48,15 @@ namespace RegionSyd.ViewModel
 
         public MainViewModel(IConfiguration config)
         {
-
             _config = config;
 
             // Landing viewmodel
             _currentViewModel = new OverviewViewModel(this, config);
 
+            if(prevVM == null)
+            {
+                prevVM = new Stack<ViewModelBase>();
+            }
 
             NavBack = new(navBack);
 
@@ -74,9 +71,12 @@ namespace RegionSyd.ViewModel
 
         private void navBack()
         {
-            ViewModelBase temp = _currentViewModel;
-            CurrentViewModel = prevVM;
-            prevVM = temp;
+            if (prevVM.Count == 0) return;
+            ViewModelBase vm = prevVM.Pop();
+            if (vm != null)
+            {
+                CurrentViewModel = vm;
+            } 
         }
 
         // Could be rewrote into lambda instead of this, would be prettier code, but less readable

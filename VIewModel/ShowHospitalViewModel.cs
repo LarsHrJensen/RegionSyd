@@ -27,21 +27,31 @@ namespace RegionSyd.ViewModel
             set 
             {
                 selectedHospital = value;
+                OnPropertyChanged(nameof(SelectedHospital));
                 UpdateTransport();
             }
         }
 
         private void UpdateTransport()
         {
-            Predicate<Transport> findTransport = (trans) => 
+            Predicate<Transport> findTransportFromHospital = (trans) => 
             {
                 return trans.StartHospital.Equals(selectedHospital);
+            };
+
+            Predicate<Transport> findTransportToHospital = (trans) =>
+            {
+                return trans.DestinationHospital.Equals(selectedHospital);
             };
 
             List<Transport> transport = new List<Transport>(transportRepo.GetAll());
             //transport.FindAll(findTransport);
 
-            TransportList = new ObservableCollection<Transport>(transport.FindAll(findTransport));
+            List<Transport> transportsFromHospital = transport.FindAll(findTransportFromHospital);
+            List<Transport> transportsToHospital = transport.FindAll(findTransportToHospital);
+
+
+            TransportList = new ObservableCollection<Transport>(transportsToHospital.Concat(transportsFromHospital));
 
             OnPropertyChanged(nameof(TransportList));
 

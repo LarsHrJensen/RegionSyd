@@ -24,10 +24,20 @@ namespace RegionSyd.ViewModel
         public NavigationCommand NavCreateAmbulance { get; }
         public NavigationCommand NavSearchTransport { get; }
 
+        public NavigationCommand NavBack { get; }
+
         List<string> Statuses;
         private readonly IConfiguration _config;
 
         public event EventHandler VMChanged;
+
+        private ViewModelBase prevVM;
+        public ViewModelBase PrevVM
+        {
+            get { return prevVM; }
+            set { prevVM = value; }
+        }
+
 
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
@@ -35,6 +45,7 @@ namespace RegionSyd.ViewModel
             get { return _currentViewModel; }
             set
             {
+                prevVM = _currentViewModel;
                 _currentViewModel = value;
                 OnPropertyChanged(nameof(CurrentViewModel));
                 VMChanged?.Invoke(this, EventArgs.Empty);
@@ -48,7 +59,9 @@ namespace RegionSyd.ViewModel
 
             // Landing viewmodel
             _currentViewModel = new OverviewViewModel(this, config);
-             
+
+
+            NavBack = new(navBack);
 
             // navigation command setup
             NavCreatePatient = new(navCreatePatient);
@@ -56,6 +69,14 @@ namespace RegionSyd.ViewModel
             NavOverview = new(navOverview);
             NavCreateAmbulance = new(navCreateAmbulance);
             NavSearchTransport = new(navSearchTransport);
+        }
+
+
+        private void navBack()
+        {
+            ViewModelBase temp = _currentViewModel;
+            CurrentViewModel = prevVM;
+            prevVM = temp;
         }
 
         // Could be rewrote into lambda instead of this, would be prettier code, but less readable
@@ -94,12 +115,13 @@ namespace RegionSyd.ViewModel
 
         public void NavShowHospital(Hospital hospital)
         {
+            // changehospital with this
             CurrentViewModel = new ShowHospitalViewModel(_config,  hospital);
         }
 
         public void NavShowAmbulance(Ambulance ambulance)
         {
-            CurrentViewModel = new ShowAmbulanceViewModel(_config, ambulance);
+            CurrentViewModel = new ShowAmbulanceViewModel(_config, ambulance, this);
         }
 
         private void navSearchTransport()

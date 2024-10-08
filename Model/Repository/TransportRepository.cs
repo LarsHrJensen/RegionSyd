@@ -197,9 +197,9 @@ namespace RegionSyd.Model.Repository
             {
                 SqlCommand command = new SqlCommand(commandText, connection);
 
-                command.Parameters.Add(new SqlParameter("@From", SqlDbType.Int) { Value = entity.StartHospital.Id });
-                command.Parameters.Add(new SqlParameter("@To", SqlDbType.Int) { Value = entity.DestinationHospital.Id });
-                command.Parameters.Add(new SqlParameter("@Patient", SqlDbType.Int) { Value = entity.Patient.Id });
+                command.Parameters.Add(new SqlParameter("@From", SqlDbType.Int)              { Value = entity.StartHospital.Id });
+                command.Parameters.Add(new SqlParameter("@To", SqlDbType.Int)                { Value = entity.DestinationHospital.Id });
+                command.Parameters.Add(new SqlParameter("@Patient", SqlDbType.Int)           { Value = entity.Patient.Id });
                 command.Parameters.Add(new SqlParameter("@Arrival", SqlDbType.SmallDateTime) { Value = entity.ArrivalTime });
 
                 connection.Open();
@@ -277,10 +277,10 @@ namespace RegionSyd.Model.Repository
             {
                 SqlCommand command = new SqlCommand(commandText, connection);
 
-                command.Parameters.Add(new SqlParameter("@From", SqlDbType.Int) { Value = entity.StartHospital.Id });
-                command.Parameters.Add(new SqlParameter("@To", SqlDbType.Int) { Value = entity.DestinationHospital.Id });
-                command.Parameters.Add(new SqlParameter("@Patient", SqlDbType.Int) { Value = entity.Patient.Id });
-                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = entity.Id });
+                command.Parameters.Add(new SqlParameter("@From", SqlDbType.Int)     { Value = entity.StartHospital.Id });
+                command.Parameters.Add(new SqlParameter("@To", SqlDbType.Int)       { Value = entity.DestinationHospital.Id });
+                command.Parameters.Add(new SqlParameter("@Patient", SqlDbType.Int)  { Value = entity.Patient.Id });
+                command.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int)       { Value = entity.Id });
 
                 connection.Open();
 

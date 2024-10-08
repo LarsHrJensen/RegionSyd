@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using RegionSyd.Model;
 using System.Diagnostics;
 using RegionSyd.Model.Command;
+using System.Windows;
 
 namespace RegionSyd.ViewModel
 {
@@ -18,6 +19,10 @@ namespace RegionSyd.ViewModel
 
         IConfiguration _configuration;
         MainViewModel _mainViewModel;
+
+
+        public string IsEmpty { get; private set; }
+        public Visibility HideWarning { get; private set; } 
 
         public static SearchTransportViewModel Instance { get; private set; }
 
@@ -115,6 +120,7 @@ namespace RegionSyd.ViewModel
             }
 
             Instance = this;
+            updateSearch();
         }
 
 
@@ -162,7 +168,22 @@ namespace RegionSyd.ViewModel
 
             Transports = new(_transportRepository.Find(arguments));
 
+
             if(ambulance!=null) RemoveAssignedTransports();
+
+            if(Transports.Count == 0)
+            {
+                IsEmpty = "No transports available to show.";
+                HideWarning = Visibility.Visible;
+            }
+            else
+            {
+                IsEmpty = "";
+                HideWarning = Visibility.Hidden;
+            }
+
+            OnPropertyChanged(nameof(IsEmpty));
+            OnPropertyChanged(nameof(HideWarning));
 
             OnPropertyChanged(nameof(Transports));
         }

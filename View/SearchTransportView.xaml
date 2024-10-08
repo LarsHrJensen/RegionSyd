@@ -74,21 +74,27 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <!-- Very scuffed solution to allow listview to expand past borders -->
-        <Canvas Grid.Column="2">
-            <ListView   Width="500" Height="400" Name="HospitalListView" SelectionMode="Single" ItemsSource="{Binding Transports}" SelectedItem="{Binding SelectedTransport, UpdateSourceTrigger=PropertyChanged}" ClipToBounds="False">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Fra Hospital" Width="auto" DisplayMemberBinding="{Binding StartHospital.Name}" />
-                        <GridViewColumn Header="Til Hospital" Width="auto" DisplayMemberBinding="{Binding DestinationHospital.Name}" />
-                        <GridViewColumn Header="Patient" Width="auto" DisplayMemberBinding="{Binding Patient.FullName}" />
-                        <GridViewColumn Header="Afgang" Width="auto" DisplayMemberBinding="{Binding ArrivalTime, StringFormat='{}{0:HH:mm}'}" />
-                        <GridViewColumn Header="Ankomst" Width="auto" DisplayMemberBinding="{Binding TravelTime, StringFormat='{}{0:HH:mm}'}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Canvas>
+        <StackPanel Grid.Column="2">
 
+            <Label Content="{Binding IsEmpty}" FontSize="20" FontWeight="Black" HorizontalAlignment="Center" Padding="5" Margin="5" Visibility="{Binding HideWarning}"/>
+
+            <!-- Very scuffed solution to allow listview to expand past borders -->
+            <Canvas >
+                <ListView   Width="500" Height="400" Name="HospitalListView" SelectionMode="Single" ItemsSource="{Binding Transports}" SelectedItem="{Binding SelectedTransport, UpdateSourceTrigger=PropertyChanged}" ClipToBounds="False">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Fra Hospital" Width="auto" DisplayMemberBinding="{Binding StartHospital.Name}" />
+                            <GridViewColumn Header="Til Hospital" Width="auto" DisplayMemberBinding="{Binding DestinationHospital.Name}" />
+                            <GridViewColumn Header="Patient" Width="auto" DisplayMemberBinding="{Binding Patient.FullName}" />
+                            <GridViewColumn Header="Afgang" Width="auto" DisplayMemberBinding="{Binding ArrivalTime, StringFormat='{}{0:HH:mm}'}" />
+                            <GridViewColumn Header="Ankomst" Width="auto" DisplayMemberBinding="{Binding TravelTime, StringFormat='{}{0:HH:mm}'}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Canvas>
+            
+
+        </StackPanel>
         <Button Name="AddButton" Margin="{StaticResource SmallMargin}" Grid.Row="5" Background="Green" Foreground="White" FontWeight="Bold"  Content="Tilføj" Command="{Binding AddTransport}" />
 
     </Grid>

@@ -20,6 +20,8 @@ namespace RegionSyd.ViewModel
     {
         IConfiguration _configuration;
 
+        public static ShowAmbulanceViewModel Instance { get; private set; }
+
         private Ambulance ambulance;
         public Ambulance Ambulance
         {
@@ -28,45 +30,56 @@ namespace RegionSyd.ViewModel
         }
 
         public NavigationCommand AddTransport { get; }
+        public NavigationCommand ChangeAmbulance { get; }
         public RelayCommand UpdateThing { get; }
 
-        private MainWindow mv;
+        private MainWindow mainWindow;
+        private MainViewModel mainViewModel;
 
         public ObservableCollection<Transport> TransportList { get; private set; }
 
         AmbulanceRepository ambulanceRepository;
         TransportRepository transportRepository;
 
-        public ShowAmbulanceViewModel(IConfiguration config, Ambulance ambulance)
+        public ShowAmbulanceViewModel(IConfiguration config, Ambulance ambulance, MainViewModel mv)
         {
             this.ambulance = ambulance;
             _configuration = config;
 
+            mainViewModel = mv;
+
             ambulanceRepository = new(config);
             transportRepository = new(config);
 
+            Instance = this;
 
             TransportList = new(transportRepository.GetByAmbulance(ambulance));
             AddTransport = new NavigationCommand(AddTransportMethod);
+            ChangeAmbulance = new NavigationCommand(ChangeAmbulanceMethod);
         }
 
         public void AddTransportMethod()
         {
-            if(mv != null)
+            if(mainWindow != null)
             {
-                mv.Close();
+                mainWindow.Close();
             }
             SearchTransportViewModel searchTransportViewModel = new SearchTransportViewModel(_configuration, null, ambulance, AddTransportCallback);
-            mv = new MainWindow(_configuration, searchTransportViewModel);
-            mv.Show();
+            mainWindow = new MainWindow(_configuration, searchTransportViewModel);
+            mainWindow.Show();
         }
 
         public void AddTransportCallback(Transport transport)
         {
-            mv.Close();
+            mainWindow.Close();
             transportRepository.AssignAmbulanceToTransport(ambulance, transport);
             TransportList = new(transportRepository.GetByAmbulance(ambulance));
             OnPropertyChanged(nameof(TransportList));
+        }
+
+        public void ChangeAmbulanceMethod()
+        {
+            mainViewModel.NavChangeAmbulance(Ambulance);
         }
     }
 }

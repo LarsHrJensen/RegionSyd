@@ -22,5 +22,11 @@
             <!--<Setter Property="Margin" Value="{StaticResource SmallMargin}"/>-->
         </Style>
 
+        
+        <!-- Probably use this in future projects, too late to properly implement as of now -->
+        <!--<Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+        </Style>-->
+
     </Application.Resources>
 </Application>

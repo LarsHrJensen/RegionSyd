@@ -55,11 +55,11 @@
                 </ListView>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Tilføj Transport" Command="{Binding AddTransport}"/>
+                    <Button Content="Tildel Transport" Command="{Binding AddTransport}"/>
 
-                    <Button Content="Fjern Transport"/>
+                    <Button Name="RemoveAssignments" Content="Fjern tildeling af transport" />
 
-                    <Button Content="Rediger Transport"/>
+                    <Button Content="Rediger ambulance" Command="{Binding ChangeAmbulance}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

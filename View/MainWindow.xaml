@@ -12,6 +12,8 @@
         <StackPanel Orientation="Vertical">
             <!-- Navigation bar -->
             <StackPanel Name="NavBar"  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button Name="NavBack" Content="Go Back" Command="{Binding NavBack}"/>
+
                 <Button Name="CreatePatient" Content="CreatePatient" Command="{Binding NavCreatePatient}" Padding="{StaticResource SmallMargin}"/>
                 <Button Name="CreateTransport" Content="CreateTransport" Command="{Binding NavCreateTransport}" Padding="{StaticResource SmallMargin}"/>
                 <Button Name="Overview" Content="Overview" Command="{Binding NavOverview}" Padding="{StaticResource SmallMargin}"/>

@@ -16,7 +16,7 @@ namespace RegionSyd.Model.Repository
         SqlConnection _connection;
         string _connectionString;
         string _tableName;
-        // I f*ing hate dependency injection, give me lethal injection instead
+        
         public PatientRepository(IConfiguration config, string tableName="Patients")
         {
             _connectionString = config.GetConnectionString("SQLAuth");
@@ -52,7 +52,7 @@ namespace RegionSyd.Model.Repository
                     {
                         // TODO : Patient cpr unnecessary for project removal inbound
                         Patient patient = new Patient(
-                            "0000000000", (string)reader["Name"], (string)reader["Status"], (int)reader["Id"]
+                            (string)reader["CPR"], (string)reader["Name"], (string)reader["Status"], (int)reader["Id"]
                             );
                         result.Add(patient);
                     }
@@ -104,13 +104,15 @@ namespace RegionSyd.Model.Repository
 
         public void Insert(Patient entity)
         {
-            string commandText = $"INSERT INTO {_tableName}([Name], [Status]) VALUES (@Name, @Status)";
+            string commandText = $"INSERT INTO {_tableName}([Name], [Status], [CPR]) VALUES (@Name, @Status, @CPR)";
 
             using (SqlConnection conn = new(_connectionString))
             {
                 SqlCommand command = new SqlCommand(commandText, conn);
-                command.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar) { Value = entity.FullName });
-                command.Parameters.Add(new SqlParameter("@Status", SqlDbType.VarChar) { Value = entity.Status });
+                command.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar)     { Value = entity.FullName });
+                command.Parameters.Add(new SqlParameter("@Status", SqlDbType.VarChar)   { Value = entity.Status });
+                command.Parameters.Add(new SqlParameter("@CPR", SqlDbType.Char)         { Value = entity.CPR });
+
 
                 conn.Open();
                 int reuslt = command.ExecuteNonQuery();

@@ -23,7 +23,7 @@ namespace RegionSyd.Model.Repository
         IConfiguration _configuration;
 
         string _tableName;
-        // I f*ing hate dependency injection, give me lethal injection instead
+        
         public TransportRepository(IConfiguration config, string tableName = "Transports", string hasTransportTableName = "AssignedAmbulances")
         {
             _configuration = config;
@@ -81,7 +81,7 @@ namespace RegionSyd.Model.Repository
 
                         if (fromHospital is null || toHospital is null)
                         {
-                            throw new Exception("Something fucky wucky happend.");
+                            throw new NullReferenceException();
                         }
 
                         Predicate<Patient> findPatient = (patient) =>
@@ -343,7 +343,6 @@ namespace RegionSyd.Model.Repository
 
                 if (set)
                 {
-                    if (args.ContainsKey("FromHospital")) Debug.WriteLine("Shit fuck");
 
                     if (args.ContainsKey("FromHospital") && args["FromHospital"] != null) command.Parameters.Add(new SqlParameter("@From", SqlDbType.Int) { Value = ((Hospital)args["FromHospital"]).Id });
                     if (args.ContainsKey("ToHospital") && args["ToHospital"] != null) command.Parameters.Add(new SqlParameter("@To", SqlDbType.Int) { Value = ((Hospital)args["ToHospital"]).Id });
@@ -392,7 +391,7 @@ namespace RegionSyd.Model.Repository
 
                         if (fromHospital is null || toHospital is null)
                         {
-                            throw new Exception("Something fucky wucky happend.");
+                            throw new NullReferenceException();
                         }
 
                         Predicate<Patient> findPatient = (patient) =>

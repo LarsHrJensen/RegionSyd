@@ -30,7 +30,7 @@ namespace RegionSyd.View
 
             if (vm == null)
             {
-                Debug.WriteLine("we fucked");
+                throw new Exception("ShowAmbulanceViewModel somehow not instantiated, or static instance reference is just null for no reason. SEGFAULT CORE DUMPED and so on");
             }
         }
 

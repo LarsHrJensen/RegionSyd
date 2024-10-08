@@ -84,7 +84,7 @@ namespace RegionSyd.ViewModel
 
             /* 
             ComboBox selectedItem wouldn't properly bind unless the Hospital from ambulance object and the 
-            corresponding Hospital from the hospitalRepo were the EXACT SAME FUCKING OBJECT, so we do this.
+            corresponding Hospital from the hospitalRepo were the EXACT SAME OBJECT, so we do this.
              */ 
             foreach (Hospital hospital in Hospitals)
             {

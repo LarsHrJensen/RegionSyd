@@ -17,7 +17,7 @@ namespace RegionSyd.Model.Repository
         string _connectionString;
         string _tableName;
 
-        // I f*ing hate dependency injection, give me lethal injection instead
+        
         public HospitalRepository(IConfiguration config, string tablename="Hospitals")
         {
             _connectionString = config.GetConnectionString("SQLAuth");

@@ -56,7 +56,7 @@ namespace RegionSyd.ViewModel
             set 
             { 
                 timeOfArrival = value;
-                // currentransport arrival time time only piss lort
+                // currentransport arrival time time only
                 SaveChanges?.RaiseCanExecuteChanged();
             }
         }
@@ -93,8 +93,7 @@ namespace RegionSyd.ViewModel
             Hospitals = new(hospitals);
             Patients = new(patients);
 
-            // VS cries about following code, something about null references
-            // who cares :DD
+            // following code is haunted by null references
             FromHospital = hospitals.Find((hospital) =>
             {
                 return (hospital.Id == transport.StartHospital.Id);
@@ -109,7 +108,7 @@ namespace RegionSyd.ViewModel
             {
                 return (patient.Id == transport.Patient.Id);
             });
-
+            // exorcism has been performed past this point
 
             // TODO : Insert datetime as text instead of datepicker
             DateOfArrival = CurrentTransport.ArrivalTime;

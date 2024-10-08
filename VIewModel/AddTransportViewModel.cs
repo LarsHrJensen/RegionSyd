@@ -117,7 +117,6 @@ namespace RegionSyd.ViewModel
 
         public void CreateTransportMethod(object param)
         {
-            Debug.WriteLine("yo?");
 
             TransportRepository repo = _transportRepository;
             if(repo == null)

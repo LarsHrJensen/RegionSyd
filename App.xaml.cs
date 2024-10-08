@@ -28,7 +28,7 @@ namespace RegionSyd
         void InitializeApp(object sender, EventArgs e)
         {
 
-            // shittest of shitcode
+            // awful code
             // navigate from bin8.0/debug blablabla to root of project so we can access appconfig.json
             string ProjectRootPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName;
             string appsettingsFilePath = ProjectRootPath + "/appconfig.json";
